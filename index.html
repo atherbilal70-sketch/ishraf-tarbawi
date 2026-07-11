@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>دليل الإشراف التربوي</title>
+
+<meta name="theme-color" content="#0a2540">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="دليل الإشراف">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="تطبيق مرجعي شخصي يجمع أهم القوانين والتعليمات الخاصة بمنصب الإشراف التربوي في وزارة التربية العراقية">
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===== Header ===== -->
+  <header class="topbar">
+    <button id="menuBtn" class="icon-btn" aria-label="القائمة">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <h1 class="app-title">دليل الإشراف التربوي</h1>
+    <button id="searchBtn" class="icon-btn" aria-label="بحث">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+
+  <!-- ===== Search overlay ===== -->
+  <div id="searchOverlay" class="search-overlay hidden">
+    <div class="search-bar">
+      <input id="searchInput" type="search" placeholder="ابحث عن قانون، تعليمات، موضوع...">
+      <button id="closeSearch" class="icon-btn">إغلاق</button>
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+
+  <!-- ===== Main views ===== -->
+  <main id="main">
+
+    <!-- HOME -->
+    <section id="view-home" class="view">
+      <div class="hero-card">
+        <div class="hero-icon">📘</div>
+        <h2>مرحباً بك</h2>
+        <p>مرجعك الشخصي السريع لأهم القوانين والتعليمات والأدوات التي تخدمك في عملك كمعاون مدير عام الإشراف التربوي.</p>
+      </div>
+
+      <div class="section-title">وصول سريع</div>
+      <div class="quick-grid" id="quickGrid"></div>
+
+      <div class="section-title">قسم المفضلة</div>
+      <div id="homeFavorites" class="list-plain"></div>
+
+      <div class="section-title">مواعيد قادمة</div>
+      <div id="homeUpcoming" class="list-plain"></div>
+    </section>
+
+    <!-- LAWS: category list -->
+    <section id="view-laws" class="view hidden">
+      <div class="section-title">تصنيفات القوانين والتعليمات</div>
+      <div id="categoryList" class="category-list"></div>
+    </section>
+
+    <!-- LAWS: category detail -->
+    <section id="view-category" class="view hidden">
+      <button class="back-btn" data-back="view-laws">‹ رجوع للتصنيفات</button>
+      <h2 id="categoryTitle" class="view-heading"></h2>
+      <div id="categoryLaws" class="list-plain"></div>
+    </section>
+
+    <!-- LAWS: law detail -->
+    <section id="view-law" class="view hidden">
+      <button class="back-btn" data-back="view-category">‹ رجوع</button>
+      <h2 id="lawTitle" class="view-heading"></h2>
+      <div id="lawMeta" class="law-meta"></div>
+      <div id="lawBody" class="law-body"></div>
+      <div class="law-actions">
+        <button id="favToggle" class="btn-outline">☆ إضافة للمفضلة</button>
+      </div>
+      <div class="section-title">ملاحظاتي</div>
+      <textarea id="lawNote" class="note-area" placeholder="أضف ملاحظة شخصية حول هذا الموضوع..."></textarea>
+      <button id="saveNote" class="btn-solid">حفظ الملاحظة</button>
+    </section>
+
+    <!-- TEMPLATES -->
+    <section id="view-templates" class="view hidden">
+      <div class="section-title">نماذج المخاطبات الرسمية</div>
+      <p class="hint-text">نماذج عامة قابلة للتعديل حسب الحاجة — اضغط "نسخ" ثم الصق وعدّل التفاصيل.</p>
+      <div id="templateList" class="list-plain"></div>
+    </section>
+
+    <!-- FAVORITES -->
+    <section id="view-favorites" class="view hidden">
+      <div class="section-title">المفضلة</div>
+      <div id="favoritesList" class="list-plain"></div>
+      <p id="favoritesEmpty" class="hint-text hidden">لا توجد عناصر في المفضلة بعد. اضغط على ☆ داخل أي قانون لإضافته هنا.</p>
+    </section>
+
+    <!-- MORE -->
+    <section id="view-more" class="view hidden">
+      <div class="section-title">جهات اتصال سريعة</div>
+      <div id="contactsList" class="list-plain"></div>
+      <button id="addContact" class="btn-outline full">+ إضافة جهة اتصال</button>
+
+      <div class="section-title">المواعيد والتذكيرات</div>
+      <div id="remindersList" class="list-plain"></div>
+      <button id="addReminder" class="btn-outline full">+ إضافة موعد</button>
+
+      <div class="section-title">الإعدادات</div>
+      <div class="settings-row">
+        <span>الوضع الليلي</span>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="settings-row">
+        <span>حجم الخط</span>
+        <div class="font-size-btns">
+          <button data-size="small">أ</button>
+          <button data-size="medium">أ</button>
+          <button data-size="large">أ</button>
+        </div>
+      </div>
+
+      <div class="section-title">حول التطبيق</div>
+      <p class="hint-text">
+        هذا التطبيق مرجع شخصي مساعد فقط، وليس بديلاً عن الرجوع للنصوص الرسمية الصادرة عن وزارة التربية والجريدة الرسمية عند اتخاذ أي قرار إداري مهم.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===== Bottom navigation ===== -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-view="view-home">
+      <svg viewBox="0 0 24 24"><path d="M4 11.5L12 4l8 7.5M6 10v9a1 1 0 001 1h4v-6h2v6h4a1 1 0 001-1v-9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>الرئيسية</span>
+    </button>
+    <button class="nav-btn" data-view="view-laws">
+      <svg viewBox="0 0 24 24"><path d="M4 4h7v16H4zM13 4h7v16h-7z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+      <span>القوانين</span>
+    </button>
+    <button class="nav-btn" data-view="view-templates">
+      <svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M9 11h6M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>النماذج</span>
+    </button>
+    <button class="nav-btn" data-view="view-favorites">
+      <svg viewBox="0 0 24 24"><path d="M12 17.3l-6.16 3.6 1.6-6.9L2 9.3l7.06-.6L12 2l2.94 6.7L22 9.3l-5.44 4.7 1.6 6.9z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+      <span>المفضلة</span>
+    </button>
+    <button class="nav-btn" data-view="view-more">
+      <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>
+      <span>المزيد</span>
+    </button>
+  </nav>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

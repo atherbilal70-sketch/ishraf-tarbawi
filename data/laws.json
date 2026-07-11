@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "id": "supervision",
+      "title": "الإشراف التربوي والزيارات الصفية",
+      "icon": "🏫",
+      "laws": []
+    },
+    {
+      "id": "promotions",
+      "title": "الترقيات العلمية والوظيفية",
+      "icon": "🎓",
+      "laws": []
+    },
+    {
+      "id": "evaluation",
+      "title": "التقييم السنوي للأداء",
+      "icon": "📊",
+      "laws": []
+    },
+    {
+      "id": "discipline",
+      "title": "الانضباط الوظيفي",
+      "icon": "⚖️",
+      "laws": []
+    },
+    {
+      "id": "exams",
+      "title": "الامتحانات والاختبارات",
+      "icon": "📝",
+      "laws": []
+    },
+    {
+      "id": "leave",
+      "title": "الإجازات",
+      "icon": "🗓️",
+      "laws": []
+    },
+    {
+      "id": "civil-service",
+      "title": "قانون الخدمة المدنية",
+      "icon": "📘",
+      "laws": []
+    },
+    {
+      "id": "general",
+      "title": "تعليمات عامة أخرى",
+      "icon": "📁",
+      "laws": []
+    }
+  ]
+}
