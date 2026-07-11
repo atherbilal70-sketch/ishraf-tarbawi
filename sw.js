@@ -1,9 +1,10 @@
-const CACHE_NAME = 'ishraf-tarbawi-v1';
+const CACHE_NAME = 'ishraf-tarbawi-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './css/style.css',
+  './js/config.js',
   './js/app.js',
   './data/laws.json',
   './icons/icon-180.png',

@@ -95,10 +95,12 @@
 
   const QUICK_ACTIONS = [
     { icon: '📚', label: 'تصفح القوانين', action: () => switchView('view-laws') },
+    { icon: '🤖', label: 'اسأل الذكاء الاصطناعي', action: () => switchView('view-ai') },
     { icon: '📄', label: 'النماذج الرسمية', action: () => switchView('view-templates') },
-    { icon: '⭐', label: 'المفضلة', action: () => switchView('view-favorites') },
-    { icon: '🗓️', label: 'إضافة موعد', action: () => { switchView('view-more'); openReminderPrompt(); } }
+    { icon: '⭐', label: 'المفضلة', action: () => switchView('view-favorites') }
   ];
+
+  const aiState = { history: [] };
 
   // ---------------- View switching ----------------
   function switchView(viewId) {
@@ -402,6 +404,79 @@
 
   el('#addReminder').addEventListener('click', openReminderPrompt);
 
+  // ---------------- AI Assistant ----------------
+  function renderAIChat() {
+    const wrap = el('#aiChat');
+    wrap.innerHTML = '';
+    aiState.history.forEach(msg => {
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-bubble ' + (msg.role === 'user' ? 'ai-user' : 'ai-assistant');
+      bubble.textContent = msg.content;
+      wrap.appendChild(bubble);
+    });
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  async function sendAIQuestion() {
+    const input = el('#aiInput');
+    const question = input.value.trim();
+    if (!question) return;
+
+    el('#aiNotConfiguredNotice').classList.add('hidden');
+    el('#aiOfflineNotice').classList.add('hidden');
+
+    const cfg = window.APP_CONFIG || {};
+    if (!cfg.aiEndpoint || cfg.aiEndpoint.indexOf('REPLACE_WITH') !== -1) {
+      el('#aiNotConfiguredNotice').classList.remove('hidden');
+      return;
+    }
+    if (!navigator.onLine) {
+      el('#aiOfflineNotice').classList.remove('hidden');
+      return;
+    }
+
+    const priorHistory = aiState.history.slice();
+    aiState.history.push({ role: 'user', content: question });
+    renderAIChat();
+    input.value = '';
+
+    const sendBtn = el('#aiSend');
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'جارٍ التفكير...';
+
+    try {
+      const res = await fetch(cfg.aiEndpoint, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-app-key': cfg.aiSharedKey || ''
+        },
+        body: JSON.stringify({
+          question,
+          history: priorHistory,
+          laws: allLaws().map(l => ({ title: l.title, summary: l.summary, body: l.body, source: l.source }))
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'خطأ غير معروف');
+      aiState.history.push({ role: 'assistant', content: data.answer || 'تعذر الحصول على إجابة.' });
+    } catch (e) {
+      aiState.history.push({ role: 'assistant', content: 'حدث خطأ أثناء الاتصال بالمساعد الذكي. حاول مرة أخرى لاحقاً.' });
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'إرسال السؤال';
+      renderAIChat();
+    }
+  }
+
+  el('#aiSend').addEventListener('click', sendAIQuestion);
+  el('#aiInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendAIQuestion();
+    }
+  });
+
   // ---------------- Settings ----------------
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -445,7 +520,17 @@
       return hay.includes(q);
     });
     if (!results.length) {
-      wrap.innerHTML = '<div class="empty-state">لا توجد نتائج مطابقة.</div>';
+      wrap.innerHTML = '';
+      const box = document.createElement('div');
+      box.className = 'empty-state';
+      box.innerHTML = 'لا توجد نتائج مطابقة في القوانين المضافة.<br><button id="askAIFromSearch" class="btn-outline" style="margin-top:.7rem;">🤖 اسأل الذكاء الاصطناعي بدلاً من ذلك</button>';
+      wrap.appendChild(box);
+      el('#askAIFromSearch').addEventListener('click', () => {
+        el('#searchOverlay').classList.add('hidden');
+        switchView('view-ai');
+        el('#aiInput').value = q;
+        el('#aiInput').focus();
+      });
       return;
     }
     results.forEach(law => {

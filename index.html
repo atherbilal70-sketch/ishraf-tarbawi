@@ -21,6 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
 </head>
 <body>
 
@@ -92,6 +93,25 @@
       <div class="section-title">ملاحظاتي</div>
       <textarea id="lawNote" class="note-area" placeholder="أضف ملاحظة شخصية حول هذا الموضوع..."></textarea>
       <button id="saveNote" class="btn-solid">حفظ الملاحظة</button>
+    </section>
+
+    <!-- AI ASSISTANT -->
+    <section id="view-ai" class="view hidden">
+      <button class="back-btn" data-back="view-home">‹ رجوع للرئيسية</button>
+      <h2 class="view-heading">اسأل عن مشكلتك</h2>
+      <p class="hint-text">اكتب مشكلتك أو سؤالك بأسلوبك الطبيعي، وسيحاول المساعد إيجاد الإجابة استناداً إلى القوانين المضافة في هذا التطبيق فقط. هذه الميزة تحتاج اتصالاً بالإنترنت.</p>
+
+      <div id="aiNotConfiguredNotice" class="empty-state hidden">لم يتم إعداد المساعد الذكي بعد من الجهة المطوّرة.</div>
+      <div id="aiOfflineNotice" class="empty-state hidden">لا يوجد اتصال بالإنترنت حالياً. هذه الميزة تحتاج إنترنت لتعمل.</div>
+
+      <div id="aiChat" class="ai-chat"></div>
+
+      <div class="ai-input-row">
+        <textarea id="aiInput" class="note-area" rows="2" placeholder="مثال: المعلم تغيب 5 أيام بدون عذر رسمي، ما الإجراء المطلوب؟"></textarea>
+        <button id="aiSend" class="btn-solid full">إرسال السؤال</button>
+      </div>
+
+      <p class="hint-text">إجابات المساعد تعتمد فقط على النصوص المضافة داخل التطبيق، وقد لا تكون كافية دائماً — تحقق من المصدر الرسمي عند اتخاذ أي قرار مهم.</p>
     </section>
 
     <!-- TEMPLATES -->

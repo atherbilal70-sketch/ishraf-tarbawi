@@ -30,6 +30,8 @@
 
 *{box-sizing:border-box;}
 
+.hidden{ display:none !important; }
+
 html,body{
   margin:0;
   padding:0;
@@ -233,6 +235,43 @@ main{
 .btn-outline{ background:transparent; border:1.5px solid var(--navy); color:var(--navy); }
 :root[data-theme="dark"] .btn-outline{ border-color:var(--gold); color:var(--gold-light); }
 .btn-outline.full{ width:100%; margin:.4rem 0 1rem; }
+.btn-solid.full{ width:100%; margin-top:.8rem; }
+.btn-solid:disabled{ opacity:.6; cursor:default; }
+
+/* ---------- AI chat ---------- */
+.ai-chat{
+  display:flex;
+  flex-direction:column;
+  gap:.7rem;
+  margin:.8rem 0;
+}
+.ai-bubble{
+  max-width:88%;
+  padding:.7rem .9rem;
+  border-radius:.9rem;
+  font-size:.9rem;
+  line-height:1.8;
+  white-space:pre-wrap;
+}
+.ai-bubble.ai-user{
+  align-self:flex-end;
+  background:var(--navy);
+  color:#fff;
+  border-bottom-left-radius:.25rem;
+}
+.ai-bubble.ai-assistant{
+  align-self:flex-start;
+  background:var(--card);
+  border:1px solid var(--border);
+  color:var(--text);
+  border-bottom-right-radius:.25rem;
+}
+.ai-input-row{
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  bottom:calc(1rem + var(--safe-bottom));
+}
 
 .hint-text{ font-size:.85rem; color:var(--text-muted); line-height:1.8; }
 
