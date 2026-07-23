@@ -28,6 +28,21 @@
 - تحديد المعدل: حد أقصى لعدد الشكاوى من نفس الـ IP في الساعة (`RATE_LIMIT_PER_HOUR`).
 - CORS مقيّد بأصل الموقع عبر `ALLOWED_ORIGIN`.
 
+## الإشعارات البريدية (اختيارية)
+
+عند ضبط السرين `RESEND_API_KEY` و`EMAIL_FROM` يرسل الخادم بريداً تلقائياً:
+
+- **عند استلام الشكوى** — تأكيد للمشتكي يتضمن رقم التتبع.
+- **عند تغيير الحالة** — إشعار بالحالة الجديدة.
+
+يستخدم خدمة [Resend](https://resend.com) (REST بسيط)، ويتطلب نطاقاً مُوثّقاً في حساب Resend
+ليكون `EMAIL_FROM` منه. إن لم يُضبط المفتاحان تعمل البوابة كاملةً دون إرسال بريد (بلا أعطال).
+
+```bash
+npx wrangler secret put RESEND_API_KEY
+npx wrangler secret put EMAIL_FROM   # no-reply@your-verified-domain
+```
+
 ## خطوات النشر
 
 يتطلب حساب Cloudflare و`npx wrangler login` لمرة واحدة.

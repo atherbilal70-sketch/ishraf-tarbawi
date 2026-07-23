@@ -43,5 +43,9 @@ jobs:
         run: |
           test -f index.html
           test -f complaints.html
+          test -f news.html
+          test -f results.html
+          test -f admin.html
+          test -f backend/src/worker.js
           test -f assets/css/site.css
           test -s assets/css/tailwind.css

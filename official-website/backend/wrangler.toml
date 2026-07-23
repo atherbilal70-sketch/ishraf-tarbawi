@@ -20,5 +20,8 @@ bucket_name = "ishraf-id-attachments"
 ALLOWED_ORIGIN = "*"          # ضع أصل الموقع الرسمي في الإنتاج، مثل https://supervision.moedu.gov.iq
 RATE_LIMIT_PER_HOUR = "5"
 
-# ADMIN_KEY يُضبط كسر (secret) وليس هنا:
-#   npx wrangler secret put ADMIN_KEY
+# الأسرار (secrets) تُضبط بأمر منفصل وليس هنا:
+#   npx wrangler secret put ADMIN_KEY        # إلزامي لتفعيل لوحة الإدارة
+#   npx wrangler secret put RESEND_API_KEY   # اختياري لتفعيل الإشعارات البريدية
+#   npx wrangler secret put EMAIL_FROM       # اختياري، مثل: no-reply@supervision.moedu.gov.iq
+# بدون RESEND_API_KEY و EMAIL_FROM تعمل البوابة كاملة لكن دون إرسال بريد.

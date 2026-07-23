@@ -152,6 +152,10 @@ async function submitComplaint(request, env, cors) {
         key, (file.name || `id.${ext}`).slice(0, 255), file.size, realType,
         'قيد المراجعة', ip, now, now
       ).run();
+
+      // إشعار بريدي بتأكيد الاستلام (لا يُعطّل الرد إن فشل أو لم يُهيّأ)
+      await notifyReceived(env, { email, fullName, ref }).catch(() => {});
+
       return json({ ref, status: 'قيد المراجعة', message: 'تم استلام شكواك بنجاح.' }, 201, cors);
     } catch (e) {
       // تصادم رقم التتبع (UNIQUE) → نظّف المرفق وأعد المحاولة
@@ -231,16 +235,24 @@ async function adminUpdate(ref, request, env, cors) {
     return json({ error: 'حالة غير معروفة', allowed: STATUSES }, 422, cors);
   }
 
+  const refUp = ref.toUpperCase();
   const now = new Date().toISOString();
   const res = await env.DB.prepare(
     'UPDATE complaints SET status = ?, updated_at = ? WHERE ref = ?'
-  ).bind(status, now, ref.toUpperCase()).run();
+  ).bind(status, now, refUp).run();
 
   if (!res.meta.changes) {
     return json({ error: 'لم يُعثر على الشكوى' }, 404, cors);
   }
-  await logAudit(env, ref.toUpperCase(), 'update_status', status, request);
-  return json({ ref: ref.toUpperCase(), status }, 200, cors);
+  await logAudit(env, refUp, 'update_status', status, request);
+
+  // إشعار بريدي بتغيير الحالة (اختياري، لا يُعطّل الرد)
+  const row = (await env.DB.prepare('SELECT email, full_name FROM complaints WHERE ref = ?').bind(refUp).all()).results[0];
+  if (row) {
+    await notifyStatus(env, { email: row.email, fullName: row.full_name, ref: refUp, status }).catch(() => {});
+  }
+
+  return json({ ref: refUp, status }, 200, cors);
 }
 
 // ---------- (محمي) تنزيل صورة الهوية ----------
@@ -284,6 +296,66 @@ async function logAudit(env, ref, action, detail, request) {
   await env.DB.prepare(
     'INSERT INTO audit_log (ref, action, detail, ip, created_at) VALUES (?,?,?,?,?)'
   ).bind(ref, action, (detail || '').slice(0, 255), ip, new Date().toISOString()).run().catch(() => {});
+}
+
+// ---------- الإشعارات البريدية (اختيارية عبر Resend) ----------
+// تُفعّل بضبط السرين: RESEND_API_KEY و EMAIL_FROM. بدونهما تُصبح دالة فارغة (no-op).
+async function sendEmail(env, { to, subject, html }) {
+  if (!env.RESEND_API_KEY || !env.EMAIL_FROM || !to) return;
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'authorization': `Bearer ${env.RESEND_API_KEY}`,
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ from: env.EMAIL_FROM, to, subject, html })
+  });
+}
+
+function emailShell(bodyHtml) {
+  return `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif;background:#f5f6f8;padding:24px">
+    <div style="max-width:560px;margin:auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0">
+      <div style="background:#0F2E52;color:#fff;padding:18px 24px">
+        <strong style="font-size:16px">مديرية الإشراف التربوي</strong>
+        <div style="font-size:12px;color:#E3C766">وزارة التربية — جمهورية العراق</div>
+      </div>
+      <div style="padding:24px;color:#334155;line-height:1.9;font-size:14px">${bodyHtml}</div>
+      <div style="padding:14px 24px;background:#f8fafc;color:#94a3b8;font-size:12px;text-align:center">
+        هذه رسالة آلية من بوابة الشكاوى الإلكترونية، يُرجى عدم الرد عليها.
+      </div>
+    </div>
+  </div>`;
+}
+
+async function notifyReceived(env, { email, fullName, ref }) {
+  await sendEmail(env, {
+    to: email,
+    subject: `تأكيد استلام شكواك — ${ref}`,
+    html: emailShell(
+      `<p>عزيزي/عزيزتي ${escapeHtml(fullName)}،</p>
+       <p>تم استلام شكواك بنجاح لدى مديرية الإشراف التربوي. رقم التتبع الخاص بها هو:</p>
+       <p style="text-align:center;font-size:20px;font-weight:bold;color:#0F2E52;letter-spacing:1px">${escapeHtml(ref)}</p>
+       <p>احتفظ بهذا الرقم لمتابعة حالة شكواك عبر بوابة الاستعلام. الحالة الحالية: <strong>قيد المراجعة</strong>.</p>`
+    )
+  });
+}
+
+async function notifyStatus(env, { email, fullName, ref, status }) {
+  await sendEmail(env, {
+    to: email,
+    subject: `تحديث حالة شكواك — ${ref}`,
+    html: emailShell(
+      `<p>عزيزي/عزيزتي ${escapeHtml(fullName)}،</p>
+       <p>تم تحديث حالة شكواك ذات الرقم <strong>${escapeHtml(ref)}</strong> إلى:</p>
+       <p style="text-align:center;font-size:18px;font-weight:bold;color:#0F2E52">${escapeHtml(status)}</p>`
+    )
+  });
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function generateRef() {
