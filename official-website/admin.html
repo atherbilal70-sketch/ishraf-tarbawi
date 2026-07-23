@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>لوحة إدارة الشكاوى — مديرية الإشراف التربوي</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230F2E52'/%3E%3Cpath d='M16 6l2.5 6.5H25l-5.2 4 2 6.5-5.8-4-5.8 4 2-6.5-5.2-4h6.5z' fill='%23C9A227'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased min-h-screen">
+
+  <!-- شاشة الدخول -->
+  <section id="login-screen" class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+      <div class="text-center mb-6">
+        <span class="mx-auto mb-4 w-14 h-14 rounded-full bg-primary flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 32 32" class="w-8 h-8"><path d="M16 4l3 8h8l-6.4 5 2.4 8-7-5-7 5 2.4-8L5 12h8z" fill="#C9A227"/></svg>
+        </span>
+        <h1 class="text-xl font-extrabold text-primary">لوحة إدارة الشكاوى</h1>
+        <p class="text-sm text-slate-500 mt-1">مخصصة للموظفين المخوّلين فقط</p>
+      </div>
+
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="api-base" class="form-label">عنوان الخادم (API)</label>
+          <input type="url" id="api-base" class="field w-full" dir="ltr" placeholder="https://ishraf-complaints.example.workers.dev">
+          <p class="text-xs text-slate-400 mt-1">يُملأ تلقائياً من إعداد الموقع إن كان مضبوطاً.</p>
+        </div>
+        <div>
+          <label for="admin-key" class="form-label">مفتاح الدخول</label>
+          <input type="password" id="admin-key" class="field w-full" dir="ltr" autocomplete="current-password" required>
+        </div>
+        <p id="login-error" class="err"></p>
+        <button type="submit" class="w-full px-4 py-3 rounded-lg bg-primary text-white font-extrabold hover:bg-primary-light transition-colors disabled:opacity-60">
+          دخول
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- اللوحة -->
+  <div id="dashboard" class="hidden">
+    <header class="bg-primary text-white">
+      <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center" aria-hidden="true">
+            <svg viewBox="0 0 32 32" class="w-6 h-6"><path d="M16 4l3 8h8l-6.4 5 2.4 8-7-5-7 5 2.4-8L5 12h8z" fill="#C9A227"/></svg>
+          </span>
+          <div>
+            <p class="font-extrabold leading-tight">لوحة إدارة الشكاوى</p>
+            <p class="text-xs text-white/60">مديرية الإشراف التربوي</p>
+          </div>
+        </div>
+        <button id="logout-btn" class="text-sm font-bold text-white/80 hover:text-gold-light transition-colors">تسجيل الخروج</button>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+      <!-- الإحصائيات -->
+      <div id="stat-cards" class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8"></div>
+
+      <!-- الفلاتر -->
+      <div class="bg-white rounded-xl border border-slate-200 p-4 mb-6 grid sm:grid-cols-3 gap-3">
+        <input id="filter-search" type="search" class="field" placeholder="بحث بالاسم أو الرقم أو البريد…" aria-label="بحث">
+        <select id="filter-status" class="field" aria-label="فلترة حسب الحالة">
+          <option value="">كل الحالات</option>
+          <option>قيد المراجعة</option>
+          <option>قيد المعالجة</option>
+          <option>منجزة</option>
+          <option>مرفوضة</option>
+        </select>
+        <button id="refresh-btn" class="px-4 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-light transition-colors">تحديث</button>
+      </div>
+
+      <!-- الجدول -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm min-w-[820px]">
+            <thead>
+              <tr class="bg-primary/5 text-primary text-start">
+                <th class="th">رقم التتبع</th>
+                <th class="th">المشتكي</th>
+                <th class="th">الصفة</th>
+                <th class="th">التاريخ</th>
+                <th class="th">الحالة</th>
+                <th class="th">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="rows" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+        <div id="table-empty" class="hidden text-center text-slate-500 py-12">لا توجد شكاوى مطابقة.</div>
+        <div id="table-loading" class="text-center text-slate-500 py-12">جارٍ التحميل…</div>
+      </div>
+
+      <!-- ترقيم الصفحات -->
+      <div id="pagination" class="flex items-center justify-between mt-4 text-sm text-slate-600">
+        <span id="page-info"></span>
+        <div class="flex gap-2">
+          <button id="prev-page" class="px-4 py-2 rounded-lg border border-slate-300 font-bold disabled:opacity-40">السابق</button>
+          <button id="next-page" class="px-4 py-2 rounded-lg border border-slate-300 font-bold disabled:opacity-40">التالي</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- نافذة تفاصيل الشكوى -->
+  <div id="detail-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detail-ref">
+    <div class="modal-backdrop" data-close-detail></div>
+    <div class="modal-box !max-w-2xl text-start">
+      <button class="modal-close" data-close-detail aria-label="إغلاق">&times;</button>
+      <h3 id="detail-ref" class="text-lg font-extrabold text-primary mb-4"></h3>
+
+      <dl class="grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm mb-5">
+        <div><dt class="text-slate-400">الاسم الثلاثي</dt><dd id="d-name" class="font-bold text-slate-700"></dd></div>
+        <div><dt class="text-slate-400">الصفة</dt><dd id="d-role" class="font-bold text-slate-700"></dd></div>
+        <div><dt class="text-slate-400">الهاتف</dt><dd id="d-phone" class="font-bold text-slate-700" dir="ltr"></dd></div>
+        <div><dt class="text-slate-400">البريد</dt><dd id="d-email" class="font-bold text-slate-700" dir="ltr"></dd></div>
+        <div><dt class="text-slate-400">تاريخ التقديم</dt><dd id="d-date" class="font-bold text-slate-700"></dd></div>
+        <div><dt class="text-slate-400">آخر تحديث</dt><dd id="d-updated" class="font-bold text-slate-700"></dd></div>
+      </dl>
+
+      <div class="mb-5">
+        <dt class="text-slate-400 text-sm mb-1">تفاصيل الشكوى</dt>
+        <dd id="d-details" class="text-slate-700 leading-relaxed bg-surface rounded-lg p-4 whitespace-pre-wrap"></dd>
+      </div>
+
+      <div class="flex flex-wrap items-end gap-3 border-t border-slate-100 pt-5">
+        <div class="flex-1 min-w-[180px]">
+          <label for="d-status" class="form-label">تغيير الحالة</label>
+          <select id="d-status" class="field w-full">
+            <option>قيد المراجعة</option>
+            <option>قيد المعالجة</option>
+            <option>منجزة</option>
+            <option>مرفوضة</option>
+          </select>
+        </div>
+        <button id="d-save" class="px-6 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-light transition-colors">حفظ الحالة</button>
+        <button id="d-download" class="px-6 py-3 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">تنزيل الهوية</button>
+      </div>
+      <p id="d-msg" class="text-sm mt-3"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

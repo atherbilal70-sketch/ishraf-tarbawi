@@ -39,6 +39,11 @@ export default {
         return await trackComplaint(m[1], env, cors);
       }
 
+      // GET /api/admin/stats
+      if (path === '/api/admin/stats' && request.method === 'GET') {
+        return await adminStats(request, env, cors);
+      }
+
       // GET /api/admin/complaints
       if (path === '/api/admin/complaints' && request.method === 'GET') {
         return await adminList(request, env, cors, url);
@@ -170,6 +175,23 @@ async function trackComplaint(ref, env, cors) {
   }
   const r = results[0];
   return json({ ref: r.ref, role: r.role, status: r.status, created_at: r.created_at }, 200, cors);
+}
+
+// ---------- (محمي) إحصائيات حسب الحالة ----------
+async function adminStats(request, env, cors) {
+  const guard = requireAdmin(request, env, cors);
+  if (guard) return guard;
+
+  const { results } = await env.DB.prepare(
+    'SELECT status, COUNT(*) AS c FROM complaints GROUP BY status'
+  ).all();
+
+  const counts = {};
+  STATUSES.forEach((s) => { counts[s] = 0; });
+  let total = 0;
+  results.forEach((r) => { counts[r.status] = r.c; total += r.c; });
+
+  return json({ total, counts }, 200, cors);
 }
 
 // ---------- (محمي) قائمة الشكاوى ----------

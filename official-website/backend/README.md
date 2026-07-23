@@ -12,6 +12,7 @@
 |---|---|---|---|
 | `POST` | `/api/complaints` | استلام شكوى (multipart) + المرفق، توليد رقم التتبع | علني |
 | `GET` | `/api/complaints/:ref` | حالة الشكوى (بيانات محدودة: الحالة، الصفة، التاريخ) | علني |
+| `GET` | `/api/admin/stats` | إحصائيات: الإجمالي وعدد كل حالة | `x-admin-key` |
 | `GET` | `/api/admin/complaints` | قائمة الشكاوى مع فلترة `?status=&q=&page=&perPage=` | `x-admin-key` |
 | `PATCH` | `/api/admin/complaints/:ref` | تحديث الحالة `{ "status": "قيد المعالجة" }` | `x-admin-key` |
 | `GET` | `/api/admin/complaints/:ref/attachment` | تنزيل صورة الهوية (+ تسجيل تدقيق) | `x-admin-key` |

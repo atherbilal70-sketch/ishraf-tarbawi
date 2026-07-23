@@ -30,6 +30,7 @@ jobs:
           node --check assets/js/main.js
           node --check assets/js/complaints.js
           node --check assets/js/config.js
+          node --check assets/js/admin.js
           node --check backend/src/worker.js
 
       - name: Install dependencies
