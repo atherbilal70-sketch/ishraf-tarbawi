@@ -10,6 +10,8 @@
   const STORAGE_KEY = 'ishraf_complaints';
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
   const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
+  // عنوان الباكند إن كان مُعدّاً (assets/js/config.js). عند غيابه يعمل الوضع التجريبي محلياً.
+  const API_BASE = (window.SITE_CONFIG && window.SITE_CONFIG.API_BASE || '').replace(/\/+$/, '');
 
   const fields = {
     fullname: document.getElementById('fullname'),
@@ -179,7 +181,57 @@
   const successModal = document.getElementById('success-modal');
   const refNumberEl = document.getElementById('ref-number');
 
-  form.addEventListener('submit', (e) => {
+  function showSuccess(ref) {
+    refNumberEl.textContent = ref;
+    successModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    form.reset();
+    clearFile(true);
+    detailsCount.textContent = '0';
+  }
+
+  function resetSubmitBtn() {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'إرسال الشكوى';
+  }
+
+  // إرسال عبر الباكند الحقيقي (Cloudflare Worker) عند إعداد API_BASE
+  async function submitToApi() {
+    const data = new FormData();
+    data.append('fullname', fields.fullname.value.trim());
+    data.append('phone', fields.phone.value.trim());
+    data.append('email', fields.email.value.trim());
+    data.append('role', form.querySelector('input[name="role"]:checked').value);
+    data.append('details', fields.details.value.trim());
+    data.append('file', fields.file.files[0]);
+
+    const resp = await fetch(API_BASE + '/api/complaints', { method: 'POST', body: data });
+    const payload = await resp.json().catch(() => ({}));
+
+    if (!resp.ok) {
+      // أخطاء تحقق من الخادم → أعرضها على الحقول المعنية
+      if (payload.fields) {
+        Object.keys(payload.fields).forEach((name) => setError(name, payload.fields[name]));
+      }
+      throw new Error(payload.error || 'تعذر إرسال الشكوى.');
+    }
+    return payload.ref;
+  }
+
+  // الوضع التجريبي: حفظ محلي وتوليد رقم في المتصفح
+  function submitLocally() {
+    const ref = generateRef();
+    saveComplaint({
+      ref,
+      name: fields.fullname.value.trim(),
+      role: form.querySelector('input[name="role"]:checked').value,
+      date: new Date().toISOString(),
+      status: 'قيد المراجعة'
+    });
+    return ref;
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const checks = [
@@ -200,27 +252,14 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'جارٍ الإرسال…';
 
-    // محاكاة إرسال إلى الخادم؛ تُستبدل بـ fetch('/api/complaints', { method: 'POST', body: new FormData(form) })
-    setTimeout(() => {
-      const ref = generateRef();
-      saveComplaint({
-        ref,
-        name: fields.fullname.value.trim(),
-        role: form.querySelector('input[name="role"]:checked').value,
-        date: new Date().toISOString(),
-        status: 'قيد المراجعة'
-      });
-
-      refNumberEl.textContent = ref;
-      successModal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-
-      form.reset();
-      clearFile(true);
-      detailsCount.textContent = '0';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'إرسال الشكوى';
-    }, 900);
+    try {
+      const ref = API_BASE ? await submitToApi() : await new Promise((r) => setTimeout(() => r(submitLocally()), 700));
+      showSuccess(ref);
+    } catch (err) {
+      alert(err.message || 'تعذر إرسال الشكوى. تحقق من اتصالك وحاول مجدداً.');
+    } finally {
+      resetSubmitBtn();
+    }
   });
 
   // ---------- نافذة النجاح ----------
@@ -241,27 +280,56 @@
   const trackInput = document.getElementById('track-input');
   const trackResult = document.getElementById('track-result');
 
-  trackForm.addEventListener('submit', (e) => {
+  function renderTrack(kind, html) {
+    const styles = {
+      error: 'border-red-200 bg-red-50 text-red-700',
+      success: 'border-green-200 bg-green-50 text-green-800',
+      warn: 'border-amber-200 bg-amber-50 text-amber-800'
+    };
+    trackResult.classList.remove('hidden');
+    trackResult.className = 'mt-4 rounded-lg border px-4 py-3 text-sm leading-relaxed ' + styles[kind];
+    trackResult.innerHTML = html;
+  }
+
+  function fmtDate(iso) {
+    return new Date(iso).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  trackForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const ref = trackInput.value.trim().toUpperCase();
-    trackResult.classList.remove('hidden');
 
     if (!ref) {
-      trackResult.className = 'mt-4 rounded-lg border border-red-200 bg-red-50 text-red-700 px-4 py-3 text-sm';
-      trackResult.textContent = 'يرجى إدخال رقم التتبع.';
+      renderTrack('error', 'يرجى إدخال رقم التتبع.');
       return;
     }
 
+    if (API_BASE) {
+      renderTrack('warn', 'جارٍ الاستعلام…');
+      try {
+        const resp = await fetch(API_BASE + '/api/complaints/' + encodeURIComponent(ref));
+        const data = await resp.json().catch(() => ({}));
+        if (resp.ok) {
+          renderTrack('success',
+            '<strong>الحالة: ' + data.status + '</strong><br>' +
+            'مقدّمة بتاريخ ' + fmtDate(data.created_at) + ' — صفة المشتكي: ' + data.role + '.');
+        } else {
+          renderTrack('warn', data.error || 'لم يُعثر على شكوى بهذا الرقم.');
+        }
+      } catch {
+        renderTrack('error', 'تعذر الاتصال بالخادم. حاول مجدداً.');
+      }
+      return;
+    }
+
+    // الوضع التجريبي (محلي)
     const found = loadComplaints().find((c) => c.ref === ref);
     if (found) {
-      const date = new Date(found.date).toLocaleDateString('ar-IQ', { year: 'numeric', month: 'long', day: 'numeric' });
-      trackResult.className = 'mt-4 rounded-lg border border-green-200 bg-green-50 text-green-800 px-4 py-3 text-sm leading-relaxed';
-      trackResult.innerHTML =
+      renderTrack('success',
         '<strong>الحالة: ' + found.status + '</strong><br>' +
-        'مقدّمة بتاريخ ' + date + ' — صفة المشتكي: ' + found.role + '.';
+        'مقدّمة بتاريخ ' + fmtDate(found.date) + ' — صفة المشتكي: ' + found.role + '.');
     } else {
-      trackResult.className = 'mt-4 rounded-lg border border-amber-200 bg-amber-50 text-amber-800 px-4 py-3 text-sm';
-      trackResult.textContent = 'لم يُعثر على شكوى بهذا الرقم. تأكد من كتابته بالشكل: ISH-السنة-الرقم.';
+      renderTrack('warn', 'لم يُعثر على شكوى بهذا الرقم. تأكد من كتابته بالشكل: ISH-السنة-الرقم.');
     }
   });
 })();
