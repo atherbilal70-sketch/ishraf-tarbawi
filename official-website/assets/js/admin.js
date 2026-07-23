@@ -200,6 +200,34 @@
     searchTimer = setTimeout(() => { page = 1; loadComplaints(); }, 350);
   });
   document.getElementById('refresh-btn').addEventListener('click', () => { loadStats(); loadComplaints(); });
+
+  // تصدير CSV (يحترم الفلاتر الحالية) — يتطلب ترويسة المصادقة → عبر blob
+  document.getElementById('export-btn').addEventListener('click', async (e) => {
+    e.target.disabled = true;
+    const prev = e.target.textContent;
+    e.target.textContent = 'جارٍ التصدير…';
+    try {
+      const params = new URLSearchParams();
+      if (filterStatus.value) params.set('status', filterStatus.value);
+      if (filterSearch.value.trim()) params.set('q', filterSearch.value.trim());
+      const resp = await fetch(apiBase + '/api/admin/export?' + params.toString(), { headers: { 'x-admin-key': adminKey } });
+      if (!resp.ok) throw new Error('تعذر التصدير.');
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'complaints-' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert(err.message || 'تعذر التصدير.');
+    } finally {
+      e.target.disabled = false;
+      e.target.textContent = prev;
+    }
+  });
   prevBtn.addEventListener('click', () => { if (page > 1) { page--; loadComplaints(); } });
   nextBtn.addEventListener('click', () => { if (page < totalPages) { page++; loadComplaints(); } });
 
@@ -216,9 +244,31 @@
     document.getElementById('d-updated').textContent = fmtDate(c.updated_at);
     document.getElementById('d-details').textContent = c.details;
     document.getElementById('d-status').value = c.status;
+    document.getElementById('audit-box').classList.add('hidden');
+    document.getElementById('audit-list').innerHTML = '';
     detailModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
   }
+
+  const ACTION_LABELS = { view_attachment: 'اطّلاع على الهوية', update_status: 'تغيير الحالة' };
+
+  document.getElementById('d-audit').addEventListener('click', async (e) => {
+    if (!current) return;
+    const box = document.getElementById('audit-box');
+    const list = document.getElementById('audit-list');
+    box.classList.remove('hidden');
+    list.innerHTML = '<li class="text-slate-400">جارٍ التحميل…</li>';
+    const res = await api('/api/admin/audit?ref=' + encodeURIComponent(current.ref));
+    if (!res.ok) { list.innerHTML = '<li class="text-red-600">تعذر تحميل السجل.</li>'; return; }
+    if (!res.data.items.length) { list.innerHTML = '<li class="text-slate-400">لا توجد سجلات.</li>'; return; }
+    list.innerHTML = res.data.items.map((a) =>
+      '<li class="flex justify-between gap-3 border-b border-slate-50 pb-1.5">' +
+        '<span class="font-bold text-slate-700">' + esc(ACTION_LABELS[a.action] || a.action) +
+          (a.detail ? ' — ' + esc(a.detail) : '') + '</span>' +
+        '<span class="text-slate-400 whitespace-nowrap">' + fmtDate(a.created_at) + '</span>' +
+      '</li>'
+    ).join('');
+  });
 
   function closeDetail() {
     detailModal.classList.add('hidden');

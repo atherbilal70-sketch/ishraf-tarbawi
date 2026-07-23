@@ -44,6 +44,16 @@ export default {
         return await adminStats(request, env, cors);
       }
 
+      // GET /api/admin/export  (تصدير CSV)
+      if (path === '/api/admin/export' && request.method === 'GET') {
+        return await adminExport(request, env, cors, url);
+      }
+
+      // GET /api/admin/audit  (سجل التدقيق)
+      if (path === '/api/admin/audit' && request.method === 'GET') {
+        return await adminAudit(request, env, cors, url);
+      }
+
       // GET /api/admin/complaints
       if (path === '/api/admin/complaints' && request.method === 'GET') {
         return await adminList(request, env, cors, url);
@@ -106,6 +116,18 @@ async function submitComplaint(request, env, cors) {
 
   if (Object.keys(errors).length) {
     return json({ error: 'تحقّق من الحقول', fields: errors }, 422, cors);
+  }
+
+  // التحقق من Turnstile (إن فُعّل عبر TURNSTILE_SECRET)
+  if (env.TURNSTILE_SECRET) {
+    const token = str(form.get('cf-turnstile-response'));
+    const ipForCaptcha = request.headers.get('cf-connecting-ip') || '';
+    if (!token) {
+      return json({ error: 'يرجى إكمال خطوة التحقق البشري.', captcha: true }, 422, cors);
+    }
+    if (!(await verifyTurnstile(env.TURNSTILE_SECRET, token, ipForCaptcha))) {
+      return json({ error: 'فشل التحقق البشري، أعد المحاولة.', captcha: true }, 403, cors);
+    }
   }
 
   // فحص النوع الحقيقي عبر البايتات الأولى (لا يُعتمد على الامتداد وحده)
@@ -282,7 +304,80 @@ async function adminAttachment(ref, request, env, cors) {
   });
 }
 
+// ---------- (محمي) تصدير CSV ----------
+async function adminExport(request, env, cors, url) {
+  const guard = requireAdmin(request, env, cors);
+  if (guard) return guard;
+
+  const status = url.searchParams.get('status');
+  const q = str(url.searchParams.get('q'));
+  const where = [];
+  const args = [];
+  if (status && STATUSES.includes(status)) { where.push('status = ?'); args.push(status); }
+  if (q) { where.push('(full_name LIKE ? OR ref LIKE ? OR email LIKE ?)'); args.push(`%${q}%`, `%${q}%`, `%${q}%`); }
+  const clause = where.length ? `WHERE ${where.join(' AND ')}` : '';
+
+  const { results } = await env.DB.prepare(
+    `SELECT ref, full_name, phone, email, role, status, created_at, updated_at
+     FROM complaints ${clause} ORDER BY created_at DESC`
+  ).bind(...args).all();
+
+  const headers = ['رقم التتبع', 'الاسم', 'الهاتف', 'البريد', 'الصفة', 'الحالة', 'تاريخ التقديم', 'آخر تحديث'];
+  const rows = results.map((r) => [r.ref, r.full_name, r.phone, r.email, r.role, r.status, r.created_at, r.updated_at]);
+  const csv = '﻿' + [headers, ...rows].map((row) => row.map(csvCell).join(',')).join('\r\n');
+
+  return new Response(csv, {
+    status: 200,
+    headers: {
+      'content-type': 'text/csv; charset=utf-8',
+      'content-disposition': `attachment; filename="complaints-${new Date().toISOString().slice(0, 10)}.csv"`,
+      ...cors
+    }
+  });
+}
+
+// ---------- (محمي) سجل التدقيق ----------
+async function adminAudit(request, env, cors, url) {
+  const guard = requireAdmin(request, env, cors);
+  if (guard) return guard;
+
+  const ref = str(url.searchParams.get('ref'));
+  const limit = Math.min(200, Math.max(1, parseInt(url.searchParams.get('limit') || '100', 10)));
+
+  let results;
+  if (ref) {
+    results = (await env.DB.prepare(
+      'SELECT ref, action, detail, ip, created_at FROM audit_log WHERE ref = ? ORDER BY created_at DESC LIMIT ?'
+    ).bind(ref.toUpperCase(), limit).all()).results;
+  } else {
+    results = (await env.DB.prepare(
+      'SELECT ref, action, detail, ip, created_at FROM audit_log ORDER BY created_at DESC LIMIT ?'
+    ).bind(limit).all()).results;
+  }
+
+  return json({ items: results }, 200, cors);
+}
+
 // ---------- أدوات ----------
+function csvCell(v) {
+  const s = v == null ? '' : String(v);
+  return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
+async function verifyTurnstile(secret, token, ip) {
+  try {
+    const body = new FormData();
+    body.append('secret', secret);
+    body.append('response', token);
+    if (ip) body.append('remoteip', ip);
+    const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
+    const data = await resp.json();
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
 function requireAdmin(request, env, cors) {
   if (!env.ADMIN_KEY) return json({ error: 'لوحة الإدارة غير مفعّلة على الخادم' }, 503, cors);
   if (request.headers.get('x-admin-key') !== env.ADMIN_KEY) {

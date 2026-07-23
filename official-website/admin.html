@@ -74,7 +74,10 @@
           <option>منجزة</option>
           <option>مرفوضة</option>
         </select>
-        <button id="refresh-btn" class="px-4 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-light transition-colors">تحديث</button>
+        <div class="flex gap-2">
+          <button id="refresh-btn" class="flex-1 px-4 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-light transition-colors">تحديث</button>
+          <button id="export-btn" class="flex-1 px-4 py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">تصدير CSV</button>
+        </div>
       </div>
 
       <!-- الجدول -->
@@ -142,8 +145,14 @@
         </div>
         <button id="d-save" class="px-6 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-light transition-colors">حفظ الحالة</button>
         <button id="d-download" class="px-6 py-3 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">تنزيل الهوية</button>
+        <button id="d-audit" class="px-6 py-3 rounded-lg border border-slate-300 text-slate-600 font-bold hover:bg-surface transition-colors">سجل التدقيق</button>
       </div>
       <p id="d-msg" class="text-sm mt-3"></p>
+
+      <div id="audit-box" class="hidden mt-4 border-t border-slate-100 pt-4">
+        <p class="text-slate-400 text-sm mb-2">سجل التدقيق لهذه الشكوى</p>
+        <ul id="audit-list" class="space-y-2 text-xs text-slate-600 max-h-48 overflow-y-auto"></ul>
+      </div>
     </div>
   </div>
 

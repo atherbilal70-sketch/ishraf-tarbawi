@@ -12,6 +12,22 @@
   const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
   // عنوان الباكند إن كان مُعدّاً (assets/js/config.js). عند غيابه يعمل الوضع التجريبي محلياً.
   const API_BASE = (window.SITE_CONFIG && window.SITE_CONFIG.API_BASE || '').replace(/\/+$/, '');
+  const TURNSTILE_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.TURNSTILE_SITE_KEY) || '';
+
+  // تحميل عنصر Turnstile ديناميكياً عند وجود مفتاح موقع
+  if (TURNSTILE_KEY) {
+    const holder = document.getElementById('turnstile-holder');
+    if (holder) {
+      holder.className = 'cf-turnstile mt-6';
+      holder.setAttribute('data-sitekey', TURNSTILE_KEY);
+      holder.setAttribute('data-language', 'ar');
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      s.async = true;
+      s.defer = true;
+      document.head.appendChild(s);
+    }
+  }
 
   const fields = {
     fullname: document.getElementById('fullname'),
@@ -205,6 +221,14 @@
     data.append('details', fields.details.value.trim());
     data.append('file', fields.file.files[0]);
 
+    // رمز Turnstile إن كان مُفعّلاً
+    if (TURNSTILE_KEY) {
+      const tokenField = form.querySelector('[name="cf-turnstile-response"]');
+      const token = tokenField ? tokenField.value : '';
+      if (!token) throw new Error('يرجى إكمال خطوة التحقق البشري قبل الإرسال.');
+      data.append('cf-turnstile-response', token);
+    }
+
     const resp = await fetch(API_BASE + '/api/complaints', { method: 'POST', body: data });
     const payload = await resp.json().catch(() => ({}));
 
@@ -259,6 +283,10 @@
       alert(err.message || 'تعذر إرسال الشكوى. تحقق من اتصالك وحاول مجدداً.');
     } finally {
       resetSubmitBtn();
+      // اطلب رمز تحقق جديداً بعد كل محاولة
+      if (TURNSTILE_KEY && window.turnstile) {
+        try { window.turnstile.reset(); } catch { /* تجاهل */ }
+      }
     }
   });
 
