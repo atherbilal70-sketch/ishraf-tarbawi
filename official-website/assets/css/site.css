@@ -1,0 +1,399 @@
+/* تنسيقات مخصصة مكمّلة لـ TailwindCSS — مديرية الإشراف التربوي */
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+
+/* ===== شريط التنقل ===== */
+.nav-link {
+  padding: .625rem 1rem;
+  border-radius: .5rem;
+  font-weight: 700;
+  color: #334155;
+  transition: color .2s, background-color .2s;
+}
+.nav-link:hover { color: #0F2E52; background: #F5F6F8; }
+.nav-active { color: #0F2E52; }
+.nav-active::after {
+  content: '';
+  display: block;
+  height: 3px;
+  margin-top: 2px;
+  border-radius: 99px;
+  background: #C9A227;
+}
+.mobile-link {
+  display: block;
+  padding: .75rem .5rem;
+  font-weight: 700;
+  color: #334155;
+  border-bottom: 1px solid #F1F5F9;
+}
+#navbar.scrolled { box-shadow: 0 4px 18px rgba(15, 46, 82, .12); }
+
+/* ===== نقش خلفي هادئ للأقسام الداكنة ===== */
+.hero-pattern {
+  background-image:
+    radial-gradient(rgba(255,255,255,.06) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(201,162,39,.08) 1.2px, transparent 1.2px);
+  background-size: 34px 34px, 34px 34px;
+  background-position: 0 0, 17px 17px;
+}
+
+/* ===== السلايدر ===== */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .7s ease, visibility .7s;
+}
+.slide-active { opacity: 1; visibility: visible; z-index: 1; }
+.slide-inner {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 0 1.5rem;
+  color: #fff;
+}
+.slide-badge {
+  display: inline-block;
+  padding: .3rem 1rem;
+  border-radius: 99px;
+  background: rgba(201,162,39,.2);
+  border: 1px solid rgba(201,162,39,.55);
+  color: #E3C766;
+  font-size: .8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.slide-title {
+  font-size: clamp(1.6rem, 4.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 1rem;
+}
+.slide-text {
+  max-width: 38rem;
+  color: rgba(255,255,255,.85);
+  font-size: clamp(.95rem, 1.6vw, 1.15rem);
+  line-height: 1.9;
+}
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 99px;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
+  transition: background-color .2s;
+}
+.slider-arrow:hover { background: rgba(255,255,255,.3); }
+.slider-dot {
+  width: .65rem;
+  height: .65rem;
+  border-radius: 99px;
+  background: rgba(255,255,255,.4);
+  transition: width .3s, background-color .3s;
+}
+.slider-dot.dot-active { width: 1.8rem; background: #C9A227; }
+
+/* ===== ترويسات الأقسام ===== */
+.section-head { text-align: center; margin-bottom: 2.5rem; }
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #0F2E52;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 4.5rem;
+  height: 4px;
+  border-radius: 99px;
+  background: #C9A227;
+  margin: .6rem auto 0;
+}
+.section-sub { color: #64748B; margin-top: .75rem; }
+
+/* ===== كروت "عن المديرية" ===== */
+.about-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform .25s, box-shadow .25s;
+}
+.about-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(15,46,82,.1); }
+.about-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .9rem;
+  background: #F7EFD8;
+  color: #0F2E52;
+}
+.about-title { font-size: 1.15rem; font-weight: 800; color: #0F2E52; margin-bottom: .5rem; }
+.about-text { color: #64748B; line-height: 1.9; font-size: .95rem; }
+
+/* ===== الإحصائيات ===== */
+.stat-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 1rem;
+  padding: 1.75rem 1rem;
+}
+.stat-num {
+  display: block;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #E3C766;
+}
+.stat-label { display: block; margin-top: .4rem; color: rgba(255,255,255,.85); font-size: .9rem; font-weight: 500; }
+
+/* ===== فلترة وكروت الأخبار ===== */
+.filter-btn {
+  padding: .5rem 1.4rem;
+  border-radius: 99px;
+  border: 1px solid #CBD5E1;
+  background: #fff;
+  color: #475569;
+  font-weight: 700;
+  font-size: .9rem;
+  transition: all .2s;
+}
+.filter-btn:hover { border-color: #0F2E52; color: #0F2E52; }
+.filter-btn.filter-active { background: #0F2E52; border-color: #0F2E52; color: #fff; }
+
+.news-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+.news-card:hover, .news-card:focus-visible { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(15,46,82,.12); outline: none; }
+.news-thumb {
+  position: relative;
+  height: 9rem;
+  background-image: linear-gradient(to left, var(--tw-gradient-stops));
+}
+.news-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.12) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.news-badge {
+  position: absolute;
+  top: .8rem;
+  inset-inline-start: .8rem;
+  z-index: 1;
+  padding: .25rem .8rem;
+  border-radius: 99px;
+  font-size: .75rem;
+  font-weight: 800;
+}
+.news-date { display: block; font-size: .75rem; color: #94A3B8; margin-bottom: .4rem; }
+.news-title { font-weight: 800; color: #0F2E52; line-height: 1.6; margin-bottom: .5rem; font-size: 1rem; }
+.news-text {
+  color: #64748B;
+  font-size: .875rem;
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== جدول النتائج ===== */
+.th { padding: .9rem 1rem; text-align: start; font-weight: 700; font-size: .85rem; white-space: nowrap; }
+.td { padding: .85rem 1rem; text-align: start; color: #334155; }
+.row:nth-child(even) { background: #F8FAFC; }
+.row:hover { background: #F7EFD8; }
+.doc-badge {
+  display: inline-block;
+  padding: .2rem .7rem;
+  border-radius: 99px;
+  background: #EFF6FF;
+  color: #1D4E89;
+  font-size: .75rem;
+  font-weight: 700;
+}
+.dl-btn {
+  padding: .35rem .9rem;
+  border-radius: .5rem;
+  background: #0F2E52;
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  transition: background-color .2s;
+}
+.dl-btn:hover { background: #1D4E89; }
+
+/* ===== حقول الإدخال ===== */
+.field {
+  padding: .8rem 1rem;
+  border-radius: .65rem;
+  border: 1.5px solid #CBD5E1;
+  background: #fff;
+  font-size: .95rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field:focus { outline: none; border-color: #0F2E52; box-shadow: 0 0 0 3px rgba(15,46,82,.12); }
+.field.field-error { border-color: #DC2626; }
+.form-label { display: block; font-weight: 700; color: #0F2E52; font-size: .92rem; margin-bottom: .45rem; }
+/* مساحة الرسالة محجوزة دائماً (visibility بدل display) كي لا يقفز التخطيط
+   عند ظهور أو اختفاء الخطأ أثناء نقر المستخدم على عنصر آخر */
+.err {
+  display: block;
+  visibility: hidden;
+  min-height: 1.25rem;
+  color: #DC2626;
+  font-size: .8rem;
+  font-weight: 500;
+  margin-top: .35rem;
+}
+.err.show { visibility: visible; }
+
+/* ===== صفة المشتكي ===== */
+/* زر الراديو شفاف ويغطي الرقعة كاملة: النقر يقع على الزر نفسه مباشرة،
+   ما يمنع قفز التمرير الذي يسببه تركيز عنصر مقصوص خارج مكانه (sr-only) */
+.role-option { position: relative; display: block; }
+.role-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.role-chip {
+  display: block;
+  text-align: center;
+  padding: .7rem .5rem;
+  border-radius: .65rem;
+  border: 1.5px solid #CBD5E1;
+  font-weight: 700;
+  font-size: .88rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all .2s;
+}
+.role-option .peer:checked + .role-chip { background: #0F2E52; border-color: #0F2E52; color: #fff; }
+.role-option .peer:focus-visible + .role-chip { box-shadow: 0 0 0 3px rgba(15,46,82,.25); }
+.role-chip:hover { border-color: #0F2E52; }
+
+/* ===== منطقة رفع الملف ===== */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 2px dashed #94A3B8;
+  border-radius: 1rem;
+  background: #F8FAFC;
+  cursor: pointer;
+  transition: border-color .2s, background-color .2s;
+}
+.dropzone:hover, .dropzone:focus-visible, .dropzone.dragover {
+  border-color: #C9A227;
+  background: #F7EFD8;
+  outline: none;
+}
+
+/* ===== مراحل المعالجة ===== */
+.steps { counter-reset: step; }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-inline-start: 2.6rem;
+  padding-bottom: 1.1rem;
+  color: #475569;
+  font-size: .9rem;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  inset-inline-start: 0;
+  top: -2px;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 99px;
+  background: #F7EFD8;
+  color: #0F2E52;
+  font-weight: 800;
+  font-size: .85rem;
+}
+.steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: .85rem;
+  top: 1.7rem;
+  bottom: .1rem;
+  width: 2px;
+  background: #E2E8F0;
+}
+
+/* ===== النوافذ المنبثقة ===== */
+.modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.modal.hidden { display: none; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(10,33,64,.65); backdrop-filter: blur(3px); }
+.modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 24px 60px rgba(10,33,64,.35);
+  animation: modal-in .28s ease;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(14px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+.modal-close {
+  position: absolute;
+  top: .9rem;
+  inset-inline-end: 1rem;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #94A3B8;
+  transition: color .2s;
+}
+.modal-close:hover { color: #DC2626; }
+
+/* ===== التذييل ===== */
+.footer-title { font-weight: 800; color: #E3C766; margin-bottom: 1rem; font-size: 1.05rem; }
+.footer-link { color: rgba(255,255,255,.7); transition: color .2s; }
+.footer-link:hover { color: #E3C766; }
+
+/* تقليل الحركة لمن يفضّل ذلك */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .slide, .about-card, .news-card, .modal-box { transition: none; animation: none; }
+}

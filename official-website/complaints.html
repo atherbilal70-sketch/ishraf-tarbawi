@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة الشكاوى الإلكترونية — مديرية الإشراف التربوي</title>
+  <meta name="description" content="قدّم شكواك إلكترونياً إلى مديرية الإشراف التربوي في وزارة التربية العراقية واحصل على رقم تتبع رسمي.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230F2E52'/%3E%3Cpath d='M16 6l2.5 6.5H25l-5.2 4 2 6.5-5.8-4-5.8 4 2-6.5-5.2-4h6.5z' fill='%23C9A227'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+  <!-- الشريط الحكومي العلوي -->
+  <div class="bg-primary-dark text-white text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between gap-2">
+      <p class="font-medium">جمهورية العراق — وزارة التربية</p>
+      <p class="hidden sm:block text-gold-light">البريد الرسمي: info@supervision.moedu.gov.iq</p>
+    </div>
+  </div>
+
+  <!-- شريط التنقل -->
+  <header id="navbar" class="bg-white sticky top-0 z-40 border-b border-slate-200 transition-shadow">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="index.html" class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-full bg-primary flex items-center justify-center shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 32 32" class="w-7 h-7"><path d="M16 4l3 8h8l-6.4 5 2.4 8-7-5-7 5 2.4-8L5 12h8z" fill="#C9A227"/></svg>
+          </span>
+          <span>
+            <span class="block font-extrabold text-primary text-base lg:text-lg leading-tight">مديرية الإشراف التربوي</span>
+            <span class="block text-xs text-slate-500">وزارة التربية — جمهورية العراق</span>
+          </span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-1" aria-label="التنقل الرئيسي">
+          <a href="index.html" class="nav-link">الرئيسية</a>
+          <a href="index.html#about" class="nav-link">عن المديرية</a>
+          <a href="index.html#news" class="nav-link">الإنجازات والأنشطة</a>
+          <a href="index.html#results" class="nav-link">النتائج والقرارات</a>
+          <a href="complaints.html" class="ms-2 px-5 py-2.5 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى</a>
+        </nav>
+        <button id="menu-btn" class="lg:hidden p-2 rounded-lg text-primary hover:bg-slate-100" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pb-4" aria-label="قائمة الهاتف">
+      <a href="index.html" class="mobile-link">الرئيسية</a>
+      <a href="index.html#about" class="mobile-link">عن المديرية</a>
+      <a href="index.html#news" class="mobile-link">الإنجازات والأنشطة</a>
+      <a href="index.html#results" class="mobile-link">النتائج والقرارات</a>
+      <a href="complaints.html" class="block mt-3 text-center px-5 py-3 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى الإلكترونية</a>
+    </nav>
+  </header>
+
+  <!-- ترويسة الصفحة -->
+  <section class="bg-gradient-to-l from-primary-dark to-primary hero-pattern text-white py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-3xl lg:text-4xl font-extrabold mb-3">بوابة الشكاوى الإلكترونية</h1>
+      <p class="text-white/85 max-w-2xl mx-auto leading-relaxed">قدّم شكواك مباشرة إلى مديرية الإشراف التربوي. تُعامل جميع البيانات والمرفقات بسرّية تامة، وستحصل فور الإرسال على رقم تتبع رسمي لمتابعة حالة الشكوى.</p>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-3 gap-8 items-start">
+
+    <!-- الاستمارة -->
+    <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 lg:p-8" aria-labelledby="form-title">
+      <h2 id="form-title" class="text-xl font-extrabold text-primary mb-1">استمارة تقديم شكوى</h2>
+      <p class="text-sm text-slate-500 mb-6">الحقول المؤشرة بعلامة <span class="text-red-600 font-bold">*</span> إجبارية.</p>
+
+      <form id="complaint-form" novalidate>
+        <div class="grid sm:grid-cols-2 gap-5">
+
+          <div class="sm:col-span-2">
+            <label for="fullname" class="form-label">الاسم الثلاثي للمشتكي <span class="text-red-600">*</span></label>
+            <input type="text" id="fullname" name="fullname" class="field w-full" placeholder="مثال: أحمد محمد جاسم" autocomplete="name" required>
+            <p class="err" id="err-fullname"></p>
+          </div>
+
+          <div>
+            <label for="phone" class="form-label">رقم الهاتف <span class="text-red-600">*</span></label>
+            <input type="tel" id="phone" name="phone" inputmode="numeric" class="field w-full" placeholder="07XXXXXXXXX" dir="ltr" autocomplete="tel" required>
+            <p class="err" id="err-phone"></p>
+          </div>
+
+          <div>
+            <label for="email" class="form-label">البريد الإلكتروني <span class="text-red-600">*</span></label>
+            <input type="email" id="email" name="email" class="field w-full" placeholder="name@example.com" dir="ltr" autocomplete="email" required>
+            <p class="err" id="err-email"></p>
+          </div>
+
+          <div class="sm:col-span-2">
+            <span class="form-label">صفة المشتكي <span class="text-red-600">*</span></span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-1" role="radiogroup" aria-label="صفة المشتكي">
+              <label class="role-option"><input type="radio" name="role" value="مدرس / معلم" class="role-input peer" required><span class="role-chip">مدرس / معلم</span></label>
+              <label class="role-option"><input type="radio" name="role" value="ولي أمر" class="role-input peer"><span class="role-chip">ولي أمر</span></label>
+              <label class="role-option"><input type="radio" name="role" value="موظف" class="role-input peer"><span class="role-chip">موظف</span></label>
+              <label class="role-option"><input type="radio" name="role" value="أخرى" class="role-input peer"><span class="role-chip">أخرى</span></label>
+            </div>
+            <p class="err" id="err-role"></p>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="details" class="form-label">تفاصيل الشكوى <span class="text-red-600">*</span></label>
+            <textarea id="details" name="details" rows="6" class="field w-full resize-y" minlength="30"
+              placeholder="اكتب تفاصيل الشكوى بوضوح: الجهة أو المدرسة المعنية، تاريخ الواقعة، والأشخاص ذوي العلاقة إن وجدوا…" required></textarea>
+            <div class="flex justify-between text-xs text-slate-400 mt-1">
+              <p class="err !mt-0" id="err-details"></p>
+              <span><span id="details-count">0</span> حرف (الحد الأدنى 30)</span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <span class="form-label">إرفاق واجهة الهوية الوطنية / البطاقة الموحدة <span class="text-red-600">*</span></span>
+            <label id="dropzone" for="id-file" class="dropzone" tabindex="0">
+              <svg class="w-10 h-10 text-primary-light mb-2" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v2.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V16"/></svg>
+              <span class="font-bold text-primary">اسحب الملف هنا أو اضغط للاختيار</span>
+              <span class="text-xs text-slate-500 mt-1">الصيغ المقبولة: PDF أو JPEG أو PNG — الحد الأقصى 5 ميغابايت</span>
+              <input type="file" id="id-file" name="id-file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" class="sr-only" required>
+            </label>
+            <div id="file-info" class="hidden mt-3 flex items-center justify-between gap-3 rounded-lg bg-gold-pale border border-gold/40 px-4 py-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <svg class="w-6 h-6 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zm0 0v5h5"/></svg>
+                <div class="min-w-0">
+                  <p id="file-name" class="text-sm font-bold text-primary truncate"></p>
+                  <p id="file-size" class="text-xs text-slate-500"></p>
+                </div>
+              </div>
+              <button type="button" id="file-remove" class="text-red-600 text-sm font-bold hover:underline shrink-0">إزالة</button>
+            </div>
+            <p class="err" id="err-file"></p>
+            <p class="text-xs text-slate-500 mt-2 flex items-start gap-1.5">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-primary-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11v5m0-8h.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg>
+              تُستخدم صورة الهوية للتحقق من هوية المشتكي حصراً، وتُحفظ في نظام مغلق لا يطّلع عليه سوى الموظفين المخوّلين، ولا تُنشر أو تُشارك مع أي جهة أخرى.
+            </p>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="confirm" class="mt-1 w-4 h-4 accent-[#0F2E52]" required>
+              <span class="text-sm text-slate-600">أُقرّ بأن جميع المعلومات الواردة في هذه الشكوى صحيحة، وأتحمّل المسؤولية القانونية في حال ثبوت خلاف ذلك.</span>
+            </label>
+            <p class="err" id="err-confirm"></p>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn"
+          class="mt-8 w-full sm:w-auto px-10 py-4 rounded-xl bg-primary text-white font-extrabold text-lg hover:bg-primary-light transition-colors disabled:opacity-60 disabled:cursor-wait">
+          إرسال الشكوى
+        </button>
+      </form>
+    </section>
+
+    <!-- العمود الجانبي: التعليمات + الاستعلام -->
+    <aside class="space-y-6">
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6" aria-labelledby="track-title">
+        <h2 id="track-title" class="text-lg font-extrabold text-primary mb-4">الاستعلام عن شكوى</h2>
+        <form id="track-form" class="space-y-3">
+          <label for="track-input" class="form-label">رقم التتبع</label>
+          <input type="text" id="track-input" class="field w-full" placeholder="ISH-2026-XXXXXX" dir="ltr">
+          <button type="submit" class="w-full px-4 py-3 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">استعلام</button>
+        </form>
+        <div id="track-result" class="hidden mt-4 rounded-lg border px-4 py-3 text-sm"></div>
+      </section>
+
+      <section class="bg-primary rounded-2xl hero-pattern text-white p-6">
+        <h2 class="text-lg font-extrabold mb-4">قبل تقديم الشكوى</h2>
+        <ul class="space-y-3 text-sm text-white/85">
+          <li class="flex gap-2"><span class="text-gold-light font-bold">1.</span> تأكد من دقة رقم الهاتف والبريد؛ سيصلك عليهما تأكيد الاستلام والرد.</li>
+          <li class="flex gap-2"><span class="text-gold-light font-bold">2.</span> اذكر التفاصيل بدقة (المدرسة، التاريخ، الأشخاص) لتسريع المعالجة.</li>
+          <li class="flex gap-2"><span class="text-gold-light font-bold">3.</span> احتفظ برقم التتبع؛ هو مرجعك الوحيد لمتابعة الشكوى.</li>
+          <li class="flex gap-2"><span class="text-gold-light font-bold">4.</span> الشكاوى الكيدية أو المجهولة الهوية تُهمل وفق الضوابط.</li>
+        </ul>
+      </section>
+
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <h2 class="text-lg font-extrabold text-primary mb-3">مراحل معالجة الشكوى</h2>
+        <ol class="steps">
+          <li>استلام الشكوى وتوليد رقم التتبع</li>
+          <li>التدقيق الأولي والتحقق من الهوية</li>
+          <li>الإحالة إلى القسم الإشرافي المختص</li>
+          <li>المعالجة والرد خلال 10 أيام عمل</li>
+        </ol>
+      </section>
+    </aside>
+  </main>
+
+  <!-- التذييل -->
+  <footer class="bg-primary-dark text-white mt-8">
+    <div class="border-t border-white/10">
+      <p class="max-w-7xl mx-auto px-4 py-5 text-center text-xs text-white/60">© <span id="year"></span> مديرية الإشراف التربوي — وزارة التربية، جمهورية العراق. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <!-- نافذة نجاح الإرسال -->
+  <div id="success-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="success-title">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box text-center">
+      <span class="mx-auto mb-4 w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+        <svg class="w-9 h-9 text-green-600" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      </span>
+      <h3 id="success-title" class="text-xl font-extrabold text-primary mb-2">تم استلام شكواك بنجاح</h3>
+      <p class="text-sm text-slate-600 mb-5">احتفظ برقم التتبع الآتي لمتابعة حالة الشكوى. سيصلك تأكيد الاستلام على بريدك الإلكتروني.</p>
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <code id="ref-number" dir="ltr" class="px-4 py-2.5 rounded-lg bg-surface border border-slate-300 text-primary font-extrabold text-lg tracking-wider"></code>
+        <button id="copy-ref" type="button" class="px-3 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary-light transition-colors">نسخ</button>
+      </div>
+      <button id="success-close" type="button" class="w-full px-4 py-3 rounded-lg bg-gold text-primary-dark font-extrabold hover:bg-gold-light transition-colors">حسناً، تم الحفظ</button>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/complaints.js"></script>
+</body>
+</html>

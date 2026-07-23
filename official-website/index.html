@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مديرية الإشراف التربوي — وزارة التربية العراقية</title>
+  <meta name="description" content="الموقع الرسمي لمديرية الإشراف التربوي في وزارة التربية العراقية: الأخبار، الإنجازات، النتائج والقرارات، وبوابة الشكاوى الإلكترونية.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230F2E52'/%3E%3Cpath d='M16 6l2.5 6.5H25l-5.2 4 2 6.5-5.8-4-5.8 4 2-6.5-5.2-4h6.5z' fill='%23C9A227'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tailwind.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+  <!-- الشريط الحكومي العلوي -->
+  <div class="bg-primary-dark text-white text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between gap-2">
+      <p class="font-medium">جمهورية العراق — وزارة التربية</p>
+      <p class="hidden sm:block text-gold-light">البريد الرسمي: info@supervision.moedu.gov.iq</p>
+    </div>
+  </div>
+
+  <!-- شريط التنقل -->
+  <header id="navbar" class="bg-white sticky top-0 z-40 border-b border-slate-200 transition-shadow">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="index.html" class="flex items-center gap-3">
+          <!-- شعار مؤقت: يُستبدل بشعار الجمهورية وشعار الوزارة الرسميين -->
+          <span class="w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-primary flex items-center justify-center shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 32 32" class="w-7 h-7"><path d="M16 4l3 8h8l-6.4 5 2.4 8-7-5-7 5 2.4-8L5 12h8z" fill="#C9A227"/></svg>
+          </span>
+          <span>
+            <span class="block font-extrabold text-primary text-base lg:text-lg leading-tight">مديرية الإشراف التربوي</span>
+            <span class="block text-xs text-slate-500">وزارة التربية — جمهورية العراق</span>
+          </span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1" aria-label="التنقل الرئيسي">
+          <a href="index.html" class="nav-link nav-active">الرئيسية</a>
+          <a href="#about" class="nav-link">عن المديرية</a>
+          <a href="#news" class="nav-link">الإنجازات والأنشطة</a>
+          <a href="#results" class="nav-link">النتائج والقرارات</a>
+          <a href="complaints.html" class="ms-2 px-5 py-2.5 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">بوابة الشكاوى</a>
+        </nav>
+
+        <button id="menu-btn" class="lg:hidden p-2 rounded-lg text-primary hover:bg-slate-100" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pb-4" aria-label="قائمة الهاتف">
+      <a href="index.html" class="mobile-link">الرئيسية</a>
+      <a href="#about" class="mobile-link">عن المديرية</a>
+      <a href="#news" class="mobile-link">الإنجازات والأنشطة</a>
+      <a href="#results" class="mobile-link">النتائج والقرارات</a>
+      <a href="complaints.html" class="block mt-3 text-center px-5 py-3 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى الإلكترونية</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- السلايدر -->
+    <section id="hero" class="relative overflow-hidden" aria-label="أبرز المستجدات">
+      <div id="slider" class="relative h-[420px] sm:h-[480px] lg:h-[560px]">
+
+        <article class="slide slide-active hero-pattern bg-gradient-to-l from-primary-dark via-primary to-primary-light">
+          <div class="slide-inner">
+            <p class="slide-badge">إعلان رسمي</p>
+            <h1 class="slide-title">مديرية الإشراف التربوي<br>نحو تعليمٍ أفضل لعراقٍ أقوى</h1>
+            <p class="slide-text">نعمل على الارتقاء بجودة العملية التربوية في عموم مدارس العراق عبر إشراف تربوي واختصاصي حديث.</p>
+            <div class="flex flex-wrap gap-3 mt-6">
+              <a href="complaints.html" class="px-6 py-3 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">قدّم شكوى إلكترونية</a>
+              <a href="#about" class="px-6 py-3 rounded-lg border-2 border-white/60 text-white font-bold hover:bg-white/10 transition-colors">تعرّف على المديرية</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide hero-pattern bg-gradient-to-l from-[#1A3A5C] via-[#215079] to-[#2B6A9F]">
+          <div class="slide-inner">
+            <p class="slide-badge">تدريب وتطوير</p>
+            <h2 class="slide-title">انطلاق البرنامج التدريبي السنوي<br>للمشرفين التربويين والاختصاص</h2>
+            <p class="slide-text">ورش تخصصية في أساليب الإشراف الحديثة والتقويم التربوي بمشاركة مديريات التربية كافة.</p>
+            <a href="#news" class="inline-block mt-6 px-6 py-3 rounded-lg bg-white text-primary font-bold hover:bg-gold-pale transition-colors">تفاصيل البرنامج</a>
+          </div>
+        </article>
+
+        <article class="slide hero-pattern bg-gradient-to-l from-[#123B33] via-[#175045] to-[#1E6A5C]">
+          <div class="slide-inner">
+            <p class="slide-badge">تقارير</p>
+            <h2 class="slide-title">صدور تقارير الجولات الإشرافية<br>للفصل الدراسي الأول</h2>
+            <p class="slide-text">اطّلع على أحدث النتائج والتقارير العامة عبر قسم النتائج والقرارات مع إمكانية البحث والفلترة.</p>
+            <a href="#results" class="inline-block mt-6 px-6 py-3 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">استعرض النتائج</a>
+          </div>
+        </article>
+
+        <button id="slide-prev" class="slider-arrow end-4" aria-label="الشريحة السابقة">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <button id="slide-next" class="slider-arrow start-4" aria-label="الشريحة التالية">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div id="slider-dots" class="absolute bottom-5 inset-x-0 flex justify-center gap-2 z-10"></div>
+      </div>
+    </section>
+
+    <!-- عن المديرية -->
+    <section id="about" class="py-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="section-head">
+          <h2 class="section-title">عن المديرية</h2>
+          <p class="section-sub">الرؤية والرسالة والأهداف التي تحكم عمل الإشراف التربوي</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <h3 class="about-title">الرؤية</h3>
+            <p class="about-text">إشراف تربوي رائد يسهم في بناء منظومة تعليمية عراقية عالية الجودة، منافسة عربياً وعالمياً.</p>
+          </article>
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.25c-2.5-2-6.5-2-9 0v12c2.5-2 6.5-2 9 0 2.5-2 6.5-2 9 0v-12c-2.5-2-6.5-2-9 0zm0 0v12"/></svg>
+            </span>
+            <h3 class="about-title">الرسالة</h3>
+            <p class="about-text">متابعة وتقويم الأداء التربوي والإداري في المدارس، وتطوير قدرات الملاكات التعليمية بما يحقق تعلّماً فاعلاً لكل طالب.</p>
+          </article>
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+            </span>
+            <h3 class="about-title">الأهداف</h3>
+            <p class="about-text">رفع كفاءة الإشراف الاختصاصي والتربوي، ترسيخ العدالة والشفافية، ومعالجة الشكاوى والملاحظات الميدانية بسرعة ومهنية.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- الإحصائيات -->
+    <section id="stats" class="py-14 bg-primary hero-pattern" aria-label="إحصائيات سريعة">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+          <div class="stat-card"><span class="stat-num" data-count="4200">0</span><span class="stat-label">مدرسة مشمولة بالإشراف</span></div>
+          <div class="stat-card"><span class="stat-num" data-count="850">0</span><span class="stat-label">مشرف تربوي واختصاصي</span></div>
+          <div class="stat-card"><span class="stat-num" data-count="12500">0</span><span class="stat-label">زيارة إشرافية سنوياً</span></div>
+          <div class="stat-card"><span class="stat-num" data-count="320">0</span><span class="stat-label">ورشة وندوة تدريبية</span></div>
+        </div>
+        <p class="text-center text-white/50 text-xs mt-6">* أرقام توضيحية تجريبية — تُستبدل بالإحصاءات الرسمية المعتمدة.</p>
+      </div>
+    </section>
+
+    <!-- الإنجازات والأنشطة -->
+    <section id="news" class="py-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="section-head">
+          <h2 class="section-title">الإنجازات والأنشطة</h2>
+          <p class="section-sub">آخر الأخبار والندوات والورش والتقارير الإشرافية</p>
+        </div>
+
+        <div id="news-filters" class="flex flex-wrap justify-center gap-2 mb-8" role="group" aria-label="فلترة الأنشطة">
+          <button class="filter-btn filter-active" data-filter="all">الكل</button>
+          <button class="filter-btn" data-filter="news">أخبار</button>
+          <button class="filter-btn" data-filter="workshop">ورش</button>
+          <button class="filter-btn" data-filter="report">تقارير</button>
+          <button class="filter-btn" data-filter="seminar">ندوات</button>
+        </div>
+
+        <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article class="news-card" data-category="news" tabindex="0">
+            <div class="news-thumb from-primary to-primary-light"><span class="news-badge bg-gold text-primary-dark">خبر</span></div>
+            <div class="p-5">
+              <time class="news-date" datetime="2026-07-12">12 تموز 2026</time>
+              <h3 class="news-title">توقيع مذكرة تعاون لتطوير أدوات التقويم الصفّي</h3>
+              <p class="news-text">وقّعت المديرية مذكرة تعاون مع الجامعات التربوية لتحديث أدوات الملاحظة الصفية ومؤشرات جودة التدريس المعتمدة في الزيارات الإشرافية.</p>
+            </div>
+          </article>
+          <article class="news-card" data-category="workshop" tabindex="0">
+            <div class="news-thumb from-[#215079] to-[#2B6A9F]"><span class="news-badge bg-white text-primary">ورشة</span></div>
+            <div class="p-5">
+              <time class="news-date" datetime="2026-07-05">5 تموز 2026</time>
+              <h3 class="news-title">ورشة الإشراف الإلكتروني والتحول الرقمي</h3>
+              <p class="news-text">ورشة تدريبية لمشرفي بغداد الكرخ والرصافة حول توظيف المنصات الرقمية في متابعة الأداء وإعداد التقارير الإشرافية.</p>
+            </div>
+          </article>
+          <article class="news-card" data-category="report" tabindex="0">
+            <div class="news-thumb from-[#175045] to-[#1E6A5C]"><span class="news-badge bg-gold text-primary-dark">تقرير</span></div>
+            <div class="p-5">
+              <time class="news-date" datetime="2026-06-28">28 حزيران 2026</time>
+              <h3 class="news-title">التقرير الإشرافي العام للفصل الدراسي الأول</h3>
+              <p class="news-text">خلاصة نتائج 6,300 زيارة إشرافية شملت المدارس الابتدائية والثانوية، مع التوصيات المرفوعة إلى مديريات التربية.</p>
+            </div>
+          </article>
+          <article class="news-card" data-category="seminar" tabindex="0">
+            <div class="news-thumb from-[#5C3A1A] to-[#8a5a2b]"><span class="news-badge bg-white text-primary">ندوة</span></div>
+            <div class="p-5">
+              <time class="news-date" datetime="2026-06-15">15 حزيران 2026</time>
+              <h3 class="news-title">ندوة حماية البيئة المدرسية من العنف</h3>
+              <p class="news-text">ندوة موسعة بمشاركة الإرشاد التربوي حول آليات الوقاية والتعامل مع حالات العنف داخل المؤسسات التعليمية.</p>
+            </div>
+          </article>
+        </div>
+        <p id="news-empty" class="hidden text-center text-slate-500 py-10">لا توجد عناصر ضمن هذا التصنيف حالياً.</p>
+      </div>
+    </section>
+
+    <!-- النتائج والقرارات -->
+    <section id="results" class="py-16 lg:py-20 bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="section-head">
+          <h2 class="section-title">النتائج والقرارات</h2>
+          <p class="section-sub">ابحث في أحدث النتائج والتقارير العامة حسب المنطقة أو المدرسة أو السنة الدراسية</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <input id="results-search" type="search" placeholder="ابحث باسم المدرسة أو العنوان…" class="field lg:col-span-2" aria-label="بحث نصي">
+          <select id="results-region" class="field" aria-label="فلترة حسب المنطقة">
+            <option value="">كل المناطق</option>
+            <option>بغداد — الكرخ</option>
+            <option>بغداد — الرصافة</option>
+            <option>البصرة</option>
+            <option>نينوى</option>
+            <option>النجف الأشرف</option>
+            <option>أربيل</option>
+          </select>
+          <select id="results-year" class="field" aria-label="فلترة حسب السنة الدراسية">
+            <option value="">كل السنوات</option>
+            <option>2025 – 2026</option>
+            <option>2024 – 2025</option>
+          </select>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table id="results-table" class="w-full text-sm min-w-[720px]">
+            <thead>
+              <tr class="bg-primary text-white text-start">
+                <th class="th">السنة الدراسية</th>
+                <th class="th">المنطقة</th>
+                <th class="th">المدرسة / الجهة</th>
+                <th class="th">نوع الوثيقة</th>
+                <th class="th">العنوان</th>
+                <th class="th">الملف</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="row"><td class="td">2025 – 2026</td><td class="td">بغداد — الكرخ</td><td class="td">إعدادية المتنبي للبنين</td><td class="td"><span class="doc-badge">نتائج</span></td><td class="td">نتائج التقويم الإشرافي — الفصل الأول</td><td class="td"><button class="dl-btn" type="button">تحميل PDF</button></td></tr>
+              <tr class="row"><td class="td">2025 – 2026</td><td class="td">بغداد — الرصافة</td><td class="td">ثانوية الزهراء للبنات</td><td class="td"><span class="doc-badge">تقرير</span></td><td class="td">تقرير الزيارة الإشرافية الشاملة</td><td class="td"><button class="dl-btn" type="button">تحميل PDF</button></td></tr>
+              <tr class="row"><td class="td">2025 – 2026</td><td class="td">البصرة</td><td class="td">عموم مدارس المحافظة</td><td class="td"><span class="doc-badge">قرار</span></td><td class="td">قرار اعتماد أدوات الملاحظة الصفية المحدّثة</td><td class="td"><button class="dl-btn" type="button">تحميل PDF</button></td></tr>
+              <tr class="row"><td class="td">2024 – 2025</td><td class="td">نينوى</td><td class="td">ابتدائية الرافدين المختلطة</td><td class="td"><span class="doc-badge">نتائج</span></td><td class="td">نتائج متابعة الخطة العلاجية للقراءة</td><td class="td"><button class="dl-btn" type="button">تحميل PDF</button></td></tr>
+              <tr class="row"><td class="td">2024 – 2025</td><td class="td">النجف الأشرف</td><td class="td">إعدادية الكوفة للبنين</td><td class="td"><span class="doc-badge">تقرير</span></td><td class="td">التقرير السنوي للإشراف الاختصاصي — الرياضيات</td><td class="td"><button class="dl-btn" type="button">تحميل PDF</button></td></tr>
+              <tr class="row"><td class="td">2024 – 2025</td><td class="td">أربيل</td><td class="td">عموم المدارس</td><td class="td"><span class="doc-badge">قرار</span></td><td class="td">ضوابط توزيع المشرفين على القطاعات التعليمية</td><td class="td"><button class="dl-btn" type="button">تحميل PDF</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="results-empty" class="hidden text-center text-slate-500 py-8">لا توجد نتائج مطابقة لخيارات البحث.</p>
+      </div>
+    </section>
+
+    <!-- دعوة لبوابة الشكاوى -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="rounded-2xl bg-gradient-to-l from-primary-dark to-primary hero-pattern text-white p-8 lg:p-12 flex flex-col lg:flex-row items-center gap-8">
+          <div class="flex-1 text-center lg:text-start">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-3">هل لديك شكوى أو ملاحظة؟</h2>
+            <p class="text-white/85 leading-relaxed max-w-2xl">بوابة الشكاوى الإلكترونية تتيح لك تقديم شكواك مباشرة إلى مديرية الإشراف التربوي مع رقم تتبع رسمي، وبسرّية تامة لبياناتك ومرفقاتك.</p>
+          </div>
+          <a href="complaints.html" class="shrink-0 px-8 py-4 rounded-xl bg-gold text-primary-dark font-extrabold text-lg hover:bg-gold-light transition-colors">قدّم شكواك الآن</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- التذييل -->
+  <footer class="bg-primary-dark text-white">
+    <div class="max-w-7xl mx-auto px-4 py-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div>
+        <h3 class="footer-title">مديرية الإشراف التربوي</h3>
+        <p class="text-white/70 leading-relaxed text-sm">إحدى تشكيلات وزارة التربية في جمهورية العراق، تُعنى بمتابعة وتقويم وتطوير الأداء التربوي في المدارس كافة.</p>
+      </div>
+      <div>
+        <h3 class="footer-title">روابط سريعة</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a class="footer-link" href="#about">عن المديرية</a></li>
+          <li><a class="footer-link" href="#news">الإنجازات والأنشطة</a></li>
+          <li><a class="footer-link" href="#results">النتائج والقرارات</a></li>
+          <li><a class="footer-link" href="complaints.html">بوابة الشكاوى الإلكترونية</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">تواصل معنا</h3>
+        <ul class="space-y-2 text-sm text-white/70">
+          <li>العنوان: بغداد — مقر وزارة التربية (عنوان توضيحي)</li>
+          <li>الهاتف: 07XX XXX XXXX</li>
+          <li>البريد: info@supervision.moedu.gov.iq</li>
+          <li>الدوام: الأحد – الخميس، 8:00 ص – 2:30 م</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="max-w-7xl mx-auto px-4 py-4 text-center text-xs text-white/60">© <span id="year"></span> مديرية الإشراف التربوي — وزارة التربية، جمهورية العراق. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <!-- نافذة تكبير الخبر -->
+  <div id="news-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="news-modal-title">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-box">
+      <button class="modal-close" data-close-modal aria-label="إغلاق">&times;</button>
+      <span id="news-modal-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gold text-primary-dark mb-3"></span>
+      <h3 id="news-modal-title" class="text-xl font-extrabold text-primary mb-1"></h3>
+      <time id="news-modal-date" class="block text-xs text-slate-500 mb-4"></time>
+      <p id="news-modal-text" class="text-slate-600 leading-relaxed"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
