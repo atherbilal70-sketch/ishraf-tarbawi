@@ -1,0 +1,29 @@
+name = "ishraf-complaints"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+
+# قاعدة بيانات الشكاوى (D1)
+# أنشئها بـ: npx wrangler d1 create ishraf-complaints
+# ثم ضع المعرّف الناتج في database_id أدناه.
+[[d1_databases]]
+binding = "DB"
+database_name = "ishraf-complaints"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# تخزين مرفقات الهوية (R2) — خاص، لا يُتاح للعامة
+# أنشئه بـ: npx wrangler r2 bucket create ishraf-id-attachments
+[[r2_buckets]]
+binding = "ATTACHMENTS"
+bucket_name = "ishraf-id-attachments"
+
+[vars]
+ALLOWED_ORIGIN = "*"          # ضع أصل الموقع الرسمي في الإنتاج، مثل https://supervision.moedu.gov.iq
+RATE_LIMIT_PER_HOUR = "5"
+
+# الأسرار (secrets) تُضبط بأمر منفصل وليس هنا:
+#   npx wrangler secret put ADMIN_KEY        # إلزامي لتفعيل لوحة الإدارة
+#   npx wrangler secret put RESEND_API_KEY   # اختياري لتفعيل الإشعارات البريدية
+#   npx wrangler secret put EMAIL_FROM       # اختياري، مثل: no-reply@supervision.moedu.gov.iq
+#   npx wrangler secret put TURNSTILE_SECRET # اختياري لتفعيل التحقق البشري (CAPTCHA)
+# بدون RESEND_API_KEY و EMAIL_FROM تعمل البوابة كاملة لكن دون إرسال بريد.
+# بدون TURNSTILE_SECRET تُقبل الشكاوى دون تحقق بشري.

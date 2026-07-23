@@ -1,0 +1,51 @@
+name: Website CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'official-website/**'
+      - '.github/workflows/website-ci.yml'
+  pull_request:
+    paths:
+      - 'official-website/**'
+      - '.github/workflows/website-ci.yml'
+
+jobs:
+  build:
+    name: Lint & build official website
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: official-website
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Syntax-check JavaScript
+        run: |
+          node --check assets/js/main.js
+          node --check assets/js/complaints.js
+          node --check assets/js/config.js
+          node --check assets/js/admin.js
+          node --check backend/src/worker.js
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build TailwindCSS
+        run: npm run build:css
+
+      - name: Verify required files exist
+        run: |
+          test -f index.html
+          test -f complaints.html
+          test -f news.html
+          test -f results.html
+          test -f admin.html
+          test -f backend/src/worker.js
+          test -f assets/css/site.css
+          test -s assets/css/tailwind.css

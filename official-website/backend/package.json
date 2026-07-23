@@ -1,0 +1,15 @@
+{
+  "name": "ishraf-complaints-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "باكند بوابة الشكاوى لمديرية الإشراف التربوي — Cloudflare Worker + D1 + R2",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute ishraf-complaints --file=schema.sql",
+    "db:init:remote": "wrangler d1 execute ishraf-complaints --remote --file=schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}
