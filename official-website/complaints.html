@@ -9,10 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F2E52">
   <link rel="stylesheet" href="assets/css/tailwind.css">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body class="bg-surface text-slate-800 font-sans antialiased">
+  <a href="#main" class="skip-link">تخطَّ إلى المحتوى الرئيسي</a>
 
   <!-- الشريط الحكومي العلوي -->
   <div class="bg-primary-dark text-white text-xs sm:text-sm">
@@ -37,10 +40,11 @@
         </a>
         <nav class="hidden lg:flex items-center gap-1" aria-label="التنقل الرئيسي">
           <a href="index.html" class="nav-link">الرئيسية</a>
-          <a href="index.html#about" class="nav-link">عن المديرية</a>
+          <a href="about.html" class="nav-link">عن المديرية</a>
           <a href="news.html" class="nav-link">الإنجازات والأنشطة</a>
           <a href="results.html" class="nav-link">النتائج والقرارات</a>
-          <a href="complaints.html" class="ms-2 px-5 py-2.5 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى</a>
+          <a href="contact.html" class="nav-link">تواصل معنا</a>
+          <a href="complaints.html" class="ms-2 px-5 py-2.5 rounded-lg bg-gold text-primary-dark font-bold" aria-current="page">بوابة الشكاوى</a>
         </nav>
         <button id="menu-btn" class="lg:hidden p-2 rounded-lg text-primary hover:bg-slate-100" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -49,9 +53,10 @@
     </div>
     <nav id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pb-4" aria-label="قائمة الهاتف">
       <a href="index.html" class="mobile-link">الرئيسية</a>
-      <a href="index.html#about" class="mobile-link">عن المديرية</a>
+      <a href="about.html" class="mobile-link">عن المديرية</a>
       <a href="news.html" class="mobile-link">الإنجازات والأنشطة</a>
       <a href="results.html" class="mobile-link">النتائج والقرارات</a>
+      <a href="contact.html" class="mobile-link">تواصل معنا</a>
       <a href="complaints.html" class="block mt-3 text-center px-5 py-3 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى الإلكترونية</a>
     </nav>
   </header>
@@ -64,7 +69,7 @@
     </div>
   </section>
 
-  <main class="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-3 gap-8 items-start">
+  <main id="main" class="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-3 gap-8 items-start">
 
     <!-- الاستمارة -->
     <section class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 lg:p-8" aria-labelledby="form-title">

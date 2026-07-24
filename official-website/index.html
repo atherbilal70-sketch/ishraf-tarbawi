@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مديرية الإشراف التربوي — وزارة التربية العراقية</title>
   <meta name="description" content="الموقع الرسمي لمديرية الإشراف التربوي في وزارة التربية العراقية: الأخبار، الإنجازات، النتائج والقرارات، وبوابة الشكاوى الإلكترونية.">
+  <meta name="theme-color" content="#0F2E52">
+  <meta property="og:title" content="مديرية الإشراف التربوي — وزارة التربية العراقية">
+  <meta property="og:description" content="الموقع الرسمي: الأخبار والإنجازات والنتائج وبوابة الشكاوى الإلكترونية.">
+  <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230F2E52'/%3E%3Cpath d='M16 6l2.5 6.5H25l-5.2 4 2 6.5-5.8-4-5.8 4 2-6.5-5.2-4h6.5z' fill='%23C9A227'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -13,6 +18,7 @@
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body class="bg-surface text-slate-800 font-sans antialiased">
+  <a href="#main" class="skip-link">تخطَّ إلى المحتوى الرئيسي</a>
 
   <!-- الشريط الحكومي العلوي -->
   <div class="bg-primary-dark text-white text-xs sm:text-sm">
@@ -38,10 +44,11 @@
         </a>
 
         <nav class="hidden lg:flex items-center gap-1" aria-label="التنقل الرئيسي">
-          <a href="index.html" class="nav-link nav-active">الرئيسية</a>
-          <a href="#about" class="nav-link">عن المديرية</a>
+          <a href="index.html" class="nav-link nav-active" aria-current="page">الرئيسية</a>
+          <a href="about.html" class="nav-link">عن المديرية</a>
           <a href="news.html" class="nav-link">الإنجازات والأنشطة</a>
           <a href="results.html" class="nav-link">النتائج والقرارات</a>
+          <a href="contact.html" class="nav-link">تواصل معنا</a>
           <a href="complaints.html" class="ms-2 px-5 py-2.5 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">بوابة الشكاوى</a>
         </nav>
 
@@ -52,14 +59,15 @@
     </div>
     <nav id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pb-4" aria-label="قائمة الهاتف">
       <a href="index.html" class="mobile-link">الرئيسية</a>
-      <a href="#about" class="mobile-link">عن المديرية</a>
+      <a href="about.html" class="mobile-link">عن المديرية</a>
       <a href="news.html" class="mobile-link">الإنجازات والأنشطة</a>
       <a href="results.html" class="mobile-link">النتائج والقرارات</a>
+      <a href="contact.html" class="mobile-link">تواصل معنا</a>
       <a href="complaints.html" class="block mt-3 text-center px-5 py-3 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى الإلكترونية</a>
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <!-- السلايدر -->
     <section id="hero" class="relative overflow-hidden" aria-label="أبرز المستجدات">
       <div id="slider" class="relative h-[420px] sm:h-[480px] lg:h-[560px]">
