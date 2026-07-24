@@ -7,7 +7,9 @@ module.exports = {
       colors: {
         primary: { DEFAULT: '#0F2E52', dark: '#0A2140', light: '#1D4E89' },
         gold: { DEFAULT: '#C9A227', light: '#E3C766', pale: '#F7EFD8' },
-        surface: '#F5F6F8'
+        surface: '#E7ECF3',
+        'surface-2': '#EEF2F8',
+        tint: '#EAF0F7'
       }
     }
   },
