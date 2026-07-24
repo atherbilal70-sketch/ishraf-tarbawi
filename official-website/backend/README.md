@@ -48,29 +48,39 @@ npx wrangler secret put RESEND_API_KEY
 npx wrangler secret put EMAIL_FROM   # no-reply@your-verified-domain
 ```
 
-## خطوات النشر
+## النشر — الطريقة الأسهل (أمر واحد)
 
-يتطلب حساب Cloudflare و`npx wrangler login` لمرة واحدة.
+سكربت `deploy.sh` يقوم بكل شيء تلقائياً: يُنشئ قاعدة D1 ومخزن R2 إن لم يوجدا، يربط
+معرّف القاعدة في `wrangler.toml`، يطبّق المخطط، يضبط الأسرار، ثم ينشر الـ Worker.
 
 ```bash
 cd official-website/backend
-npm install
+npx wrangler login          # مرة واحدة (أو: export CLOUDFLARE_API_TOKEN=xxxxx)
 
-# 1) أنشئ قاعدة D1 وانسخ database_id إلى wrangler.toml
-npx wrangler d1 create ishraf-complaints
+# أسرار اختيارية تُلتقط تلقائياً إن ضبطتها في البيئة:
+export ADMIN_KEY='مفتاح-قوي-للوحة-الإدارة'
+# export RESEND_API_KEY=...  EMAIL_FROM=...  TURNSTILE_SECRET=...
 
-# 2) أنشئ حاوية R2 الخاصة
+bash deploy.sh
+```
+
+يطبع السكربت في النهاية رابط الـ API الجاهز لوضعه في `config.js`.
+
+### النشر من GitHub بنقرة (بدون جهازك)
+
+هناك مسار بديل عبر GitHub Actions: workflow باسم **Deploy Complaints Backend**
+يشغّل `deploy.sh` نفسه. أضِف الأسرار في إعدادات المستودع
+(Settings → Secrets and variables → Actions): `CLOUDFLARE_API_TOKEN` و`ADMIN_KEY`
+(والاختيارية إن رغبت)، ثم Actions → Deploy Complaints Backend → **Run workflow**.
+
+### الطريقة اليدوية (للفهم أو التخصيص)
+
+```bash
+cd official-website/backend && npm install
+npx wrangler d1 create ishraf-complaints        # انسخ database_id إلى wrangler.toml
 npx wrangler r2 bucket create ishraf-id-attachments
-
-# 3) هيّئ الجداول (محلياً للتطوير، وعن بُعد للإنتاج)
-npm run db:init          # محلي
-npm run db:init:remote   # على قاعدة الإنتاج
-
-# 4) اضبط مفتاح الموظفين للمسارات المحمية
+npm run db:init:remote                          # تهيئة جداول الإنتاج
 npx wrangler secret put ADMIN_KEY
-
-# 5) شغّل محلياً أو انشر
-npm run dev
 npm run deploy
 ```
 

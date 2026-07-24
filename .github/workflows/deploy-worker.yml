@@ -1,0 +1,44 @@
+name: Deploy Complaints Backend (Cloudflare)
+
+# تشغيل يدوي فقط: لا يعمل تلقائياً كي لا يفشل قبل ضبط السر.
+# قبل التشغيل، أضِف في إعدادات المستودع (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   (إلزامي)  — رمز API بصلاحية تحرير Workers و D1 و R2
+#   ADMIN_KEY              (إلزامي لتفعيل لوحة الإدارة)
+#   RESEND_API_KEY, EMAIL_FROM, TURNSTILE_SECRET   (اختيارية)
+# ثم: Actions → Deploy Complaints Backend → Run workflow.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Provision & deploy Worker
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: official-website/backend
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fail early if token missing
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN secret is not set. Add it in repo Settings → Secrets → Actions."
+            exit 1
+          fi
+
+      - name: Install backend dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Provision resources, apply schema, set secrets, and deploy
+        run: bash deploy.sh
