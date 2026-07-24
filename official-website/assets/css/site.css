@@ -3,6 +3,28 @@
 html { scroll-behavior: smooth; }
 body { -webkit-font-smoothing: antialiased; }
 
+/* ===== رابط التخطي (وصولية) ===== */
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -3rem;
+  z-index: 100;
+  padding: .6rem 1.2rem;
+  border-radius: .5rem;
+  background: #0F2E52;
+  color: #fff;
+  font-weight: 700;
+  transition: top .2s;
+}
+.skip-link:focus { top: 1rem; outline: 3px solid #C9A227; }
+
+/* إبراز التركيز لكل العناصر التفاعلية (وصولية) */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid rgba(201, 162, 39, .6);
+  outline-offset: 2px;
+}
+
 /* ===== شريط التنقل ===== */
 .nav-link {
   padding: .625rem 1rem;
@@ -386,6 +408,80 @@ body { -webkit-font-smoothing: antialiased; }
   transition: color .2s;
 }
 .modal-close:hover { color: #DC2626; }
+
+/* ===== مهام المديرية (صفحة عن المديرية) ===== */
+.task-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform .2s, box-shadow .2s;
+}
+.task-item:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(15,46,82,.08); }
+.task-item p { color: #475569; line-height: 1.8; font-size: .95rem; }
+.task-num {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .7rem;
+  background: #F7EFD8;
+  color: #0F2E52;
+  font-weight: 800;
+}
+
+/* ===== الهيكل التنظيمي ===== */
+.org-chart { max-width: 60rem; margin: 0 auto; }
+.org-top { display: flex; justify-content: center; }
+.org-box {
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: .8rem;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+  color: #334155;
+  font-size: .92rem;
+  transition: border-color .2s, background-color .2s;
+}
+.org-box:hover { border-color: #C9A227; background: #F7EFD8; }
+.org-head {
+  background: #0F2E52;
+  color: #fff;
+  border-color: #0F2E52;
+  padding-inline: 2rem;
+  font-size: 1rem;
+}
+.org-line { width: 2px; height: 1.75rem; background: #CBD5E1; margin: 0 auto; }
+
+/* ===== بطاقات التواصل ===== */
+.contact-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+.contact-icon {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .7rem;
+  background: #F7EFD8;
+  color: #0F2E52;
+}
+.contact-title { font-weight: 800; color: #0F2E52; font-size: .95rem; margin-bottom: .25rem; }
+.contact-text { color: #64748B; font-size: .9rem; line-height: 1.7; }
 
 /* ===== التذييل ===== */
 .footer-title { font-weight: 800; color: #E3C766; margin-bottom: 1rem; font-size: 1.05rem; }

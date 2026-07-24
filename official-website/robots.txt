@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# لوحة الإدارة غير مخصصة للفهرسة
+Disallow: /official-website/admin.html
+
+Sitemap: https://atherbilal70-sketch.github.io/ishraf-tarbawi/official-website/sitemap.xml

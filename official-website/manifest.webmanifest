@@ -1,0 +1,20 @@
+{
+  "name": "مديرية الإشراف التربوي — وزارة التربية العراقية",
+  "short_name": "الإشراف التربوي",
+  "description": "الموقع الرسمي لمديرية الإشراف التربوي: الأخبار والنتائج وبوابة الشكاوى الإلكترونية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#F5F6F8",
+  "theme_color": "#0F2E52",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230F2E52'/%3E%3Cpath d='M256 96l40 104h128l-83 64 32 104-117-80-117 80 32-104-83-64h128z' fill='%23C9A227'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
