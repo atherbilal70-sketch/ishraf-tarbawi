@@ -78,12 +78,42 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 #navbar.scrolled { box-shadow: 0 4px 18px rgba(15, 46, 82, .12); }
 
 /* ===== نقش خلفي هادئ للأقسام الداكنة ===== */
+/* نقوش خفيفة تُوضع فوق لون خلفية صلب (مثل قسم الإحصاءات) */
 .hero-pattern {
   background-image:
     radial-gradient(rgba(255,255,255,.06) 1.2px, transparent 1.2px),
     radial-gradient(rgba(201,162,39,.08) 1.2px, transparent 1.2px);
   background-size: 34px 34px, 34px 34px;
   background-position: 0 0, 17px 17px;
+}
+
+/* خلفيات الأبطال والترويسات: نقوش فوق تدرّج كحلي في تعريف واحد
+   (يمنع تعارض background-image الذي كان يُخفي التدرّج) + لون صلب احتياطي */
+.hero-navy, .hero-blue, .hero-green {
+  background-repeat: repeat, repeat, no-repeat;
+  background-size: 34px 34px, 34px 34px, cover;
+  background-position: 0 0, 17px 17px, center;
+}
+.hero-navy {
+  background-color: #0F2E52;
+  background-image:
+    radial-gradient(rgba(255,255,255,.06) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(201,162,39,.10) 1.2px, transparent 1.2px),
+    linear-gradient(to left, #0A2140 0%, #123153 55%, #1D4E89 100%);
+}
+.hero-blue {
+  background-color: #215079;
+  background-image:
+    radial-gradient(rgba(255,255,255,.06) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(201,162,39,.10) 1.2px, transparent 1.2px),
+    linear-gradient(to left, #1A3A5C 0%, #215079 55%, #2B6A9F 100%);
+}
+.hero-green {
+  background-color: #175045;
+  background-image:
+    radial-gradient(rgba(255,255,255,.06) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(201,162,39,.10) 1.2px, transparent 1.2px),
+    linear-gradient(to left, #123B33 0%, #175045 55%, #1E6A5C 100%);
 }
 
 /* ===== السلايدر ===== */
