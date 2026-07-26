@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الإنجازات والأنشطة — مديرية الإشراف التربوي</title>
-  <meta name="description" content="أخبار وإنجازات وأنشطة وورش وندوات وتقارير مديرية الإشراف التربوي في وزارة التربية العراقية.">
+  <title>الأسئلة الشائعة — مديرية الإشراف التربوي</title>
+  <meta name="description" content="إجابات عن الأسئلة الأكثر شيوعاً حول بوابة الشكاوى الإلكترونية والإشراف التربوي في وزارة التربية العراقية.">
+  <meta property="og:title" content="الأسئلة الشائعة — مديرية الإشراف التربوي">
+  <meta property="og:description" content="إجابات عن الأسئلة الشائعة حول الشكاوى والإشراف التربوي.">
+  <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230F2E52'/%3E%3Cpath d='M16 6l2.5 6.5H25l-5.2 4 2 6.5-5.8-4-5.8 4 2-6.5-5.2-4h6.5z' fill='%23C9A227'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F2E52">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0F2E52">
   <link rel="stylesheet" href="assets/css/tailwind.css">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -39,7 +42,7 @@
         <nav class="hidden lg:flex items-center gap-1" aria-label="التنقل الرئيسي">
           <a href="index.html" class="nav-link">الرئيسية</a>
           <a href="about.html" class="nav-link">عن المديرية</a>
-          <a href="news.html" class="nav-link nav-active" aria-current="page">الإنجازات والأنشطة</a>
+          <a href="news.html" class="nav-link">الإنجازات والأنشطة</a>
           <a href="results.html" class="nav-link">النتائج والقرارات</a>
           <a href="contact.html" class="nav-link">تواصل معنا</a>
           <a href="complaints.html" class="ms-2 px-5 py-2.5 rounded-lg bg-gold text-primary-dark font-bold">بوابة الشكاوى</a>
@@ -61,95 +64,70 @@
 
   <section class="hero-navy text-white py-12 lg:py-16">
     <div class="max-w-7xl mx-auto px-4 text-center">
-      <h1 class="text-3xl lg:text-4xl font-extrabold mb-3">الإنجازات والأنشطة</h1>
-      <p class="text-white/85 max-w-2xl mx-auto leading-relaxed">تابع آخر أخبار المديرية وإنجازاتها وأنشطتها من ورش وندوات وتقارير إشرافية.</p>
+      <h1 class="text-3xl lg:text-4xl font-extrabold mb-3">الأسئلة الشائعة</h1>
+      <p class="text-white/85 max-w-2xl mx-auto leading-relaxed">إجابات عن أكثر الأسئلة تكراراً حول بوابة الشكاوى والإشراف التربوي.</p>
     </div>
   </section>
 
-  <main id="main" class="max-w-7xl mx-auto px-4 py-12">
-    <div id="news-filters" class="flex flex-wrap justify-center gap-2 mb-8" role="group" aria-label="فلترة الأنشطة">
-      <button class="filter-btn filter-active" data-filter="all">الكل</button>
-      <button class="filter-btn" data-filter="news">أخبار</button>
-      <button class="filter-btn" data-filter="workshop">ورش</button>
-      <button class="filter-btn" data-filter="report">تقارير</button>
-      <button class="filter-btn" data-filter="seminar">ندوات</button>
-    </div>
+  <main id="main" class="max-w-3xl mx-auto px-4 py-12">
 
-    <div id="news-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <article class="news-card" data-category="news" tabindex="0">
-        <div class="news-thumb from-primary to-primary-light"><span class="news-badge bg-gold text-primary-dark">خبر</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-07-12">12 تموز 2026</time>
-          <h3 class="news-title">توقيع مذكرة تعاون لتطوير أدوات التقويم الصفّي</h3>
-          <p class="news-text">وقّعت المديرية مذكرة تعاون مع الجامعات التربوية لتحديث أدوات الملاحظة الصفية ومؤشرات جودة التدريس المعتمدة في الزيارات الإشرافية.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="workshop" tabindex="0">
-        <div class="news-thumb from-[#215079] to-[#2B6A9F]"><span class="news-badge bg-white text-primary">ورشة</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-07-05">5 تموز 2026</time>
-          <h3 class="news-title">ورشة الإشراف الإلكتروني والتحول الرقمي</h3>
-          <p class="news-text">ورشة تدريبية لمشرفي بغداد الكرخ والرصافة حول توظيف المنصات الرقمية في متابعة الأداء وإعداد التقارير الإشرافية.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="report" tabindex="0">
-        <div class="news-thumb from-[#175045] to-[#1E6A5C]"><span class="news-badge bg-gold text-primary-dark">تقرير</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-06-28">28 حزيران 2026</time>
-          <h3 class="news-title">التقرير الإشرافي العام للفصل الدراسي الأول</h3>
-          <p class="news-text">خلاصة نتائج 6,300 زيارة إشرافية شملت المدارس الابتدائية والثانوية، مع التوصيات المرفوعة إلى مديريات التربية.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="seminar" tabindex="0">
-        <div class="news-thumb from-[#5C3A1A] to-[#8a5a2b]"><span class="news-badge bg-white text-primary">ندوة</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-06-15">15 حزيران 2026</time>
-          <h3 class="news-title">ندوة حماية البيئة المدرسية من العنف</h3>
-          <p class="news-text">ندوة موسعة بمشاركة الإرشاد التربوي حول آليات الوقاية والتعامل مع حالات العنف داخل المؤسسات التعليمية.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="workshop" tabindex="0">
-        <div class="news-thumb from-[#1D4E89] to-[#2B6A9F]"><span class="news-badge bg-white text-primary">ورشة</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-06-02">2 حزيران 2026</time>
-          <h3 class="news-title">دورة إعداد المشرفين الجدد</h3>
-          <p class="news-text">اختتام الدورة التأهيلية للمشرفين المعيّنين حديثاً في أساليب الإشراف الحديثة وأخلاقيات المهنة والتقويم البنّاء.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="news" tabindex="0">
-        <div class="news-thumb from-primary to-primary-light"><span class="news-badge bg-gold text-primary-dark">خبر</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-05-20">20 أيار 2026</time>
-          <h3 class="news-title">تكريم المدارس المتميزة في التقويم الإشرافي</h3>
-          <p class="news-text">كرّمت المديرية المدارس الحاصلة على أعلى مؤشرات الجودة في الزيارات الإشرافية لهذا العام ضمن حفل سنوي.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="report" tabindex="0">
-        <div class="news-thumb from-[#175045] to-[#1E6A5C]"><span class="news-badge bg-gold text-primary-dark">تقرير</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-05-08">8 أيار 2026</time>
-          <h3 class="news-title">تقرير متابعة الخطط العلاجية للقراءة</h3>
-          <p class="news-text">نتائج متابعة الخطط العلاجية لمهارات القراءة في المرحلة الابتدائية وأثرها على مستوى الطلبة.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="seminar" tabindex="0">
-        <div class="news-thumb from-[#5C3A1A] to-[#8a5a2b]"><span class="news-badge bg-white text-primary">ندوة</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-04-25">25 نيسان 2026</time>
-          <h3 class="news-title">ندوة دمج التقنية في التعليم</h3>
-          <p class="news-text">ندوة تخصصية حول توظيف الوسائل التقنية والذكاء الاصطناعي في العملية التعليمية والإشرافية.</p>
-        </div>
-      </article>
-      <article class="news-card" data-category="news" tabindex="0">
-        <div class="news-thumb from-primary to-primary-light"><span class="news-badge bg-gold text-primary-dark">خبر</span></div>
-        <div class="p-5">
-          <time class="news-date" datetime="2026-04-10">10 نيسان 2026</time>
-          <h3 class="news-title">إطلاق منصة الزيارات الإشرافية الإلكترونية</h3>
-          <p class="news-text">دشّنت المديرية منصة رقمية لجدولة الزيارات الإشرافية وتوثيق نتائجها آلياً بما يقلل الأعباء الورقية.</p>
-        </div>
-      </article>
+    <h2 class="text-xl font-extrabold text-primary mb-5">بوابة الشكاوى الإلكترونية</h2>
+
+    <details class="faq-item" open>
+      <summary>كيف أقدّم شكوى وأحصل على رقم تتبع؟</summary>
+      <div class="faq-answer">ادخل إلى <a href="complaints.html" class="text-primary font-bold underline">بوابة الشكاوى الإلكترونية</a>، واملأ الاستمارة (الاسم الثلاثي، الهاتف، البريد، صفتك، تفاصيل الشكوى) وأرفق صورة الهوية الوطنية، ثم اضغط «إرسال». يظهر لك فوراً رقم تتبع بصيغة <span dir="ltr">ISH-YYYY-XXXXXX</span> احتفظ به لمتابعة شكواك.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>ما الصيغ والأحجام المقبولة لصورة الهوية؟</summary>
+      <div class="faq-answer">تُقبل ملفات PDF أو صور JPEG أو PNG، بحدٍّ أقصى 5 ميغابايت للملف. يُتحقق من نوع الملف فعلياً على الخادم لضمان سلامته.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>هل بياناتي وصورة هويتي آمنة؟</summary>
+      <div class="faq-answer">نعم. تُخزَّن المرفقات في نظام مغلق لا يُتيحها للعامة، ولا يطّلع عليها سوى الموظفين المخوّلين لغرض التحقق فقط، ويُسجَّل كل اطّلاع في سجل تدقيق. لا تُنشر بياناتك أو تُشارك مع أي جهة أخرى.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>متى أتوقّع الرد على شكواي؟</summary>
+      <div class="faq-answer">تمر الشكوى بمراحل: الاستلام، التدقيق والتحقق من الهوية، الإحالة إلى القسم المختص، ثم المعالجة والرد عادةً خلال 10 أيام عمل. يمكنك متابعة الحالة في أي وقت عبر «الاستعلام عن شكوى» برقم التتبع.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>كيف أتتبّع حالة شكوى قدّمتها سابقاً؟</summary>
+      <div class="faq-answer">من صفحة <a href="complaints.html#track" class="text-primary font-bold underline">بوابة الشكاوى</a>، أدخل رقم التتبع في مربع «الاستعلام عن شكوى» واضغط «استعلام» لعرض حالتها الحالية.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>هل تُقبل الشكاوى المجهولة؟</summary>
+      <div class="faq-answer">الشكاوى الكيدية أو المجهولة الهوية تُهمل وفق الضوابط. إرفاق الهوية إجباري للتحقق من هوية المشتكي وحمايةً لجدّية الشكوى.</div>
+    </details>
+
+    <h2 class="text-xl font-extrabold text-primary mt-10 mb-5">الإشراف التربوي</h2>
+
+    <details class="faq-item">
+      <summary>ما دور مديرية الإشراف التربوي؟</summary>
+      <div class="faq-answer">تُعنى المديرية بمتابعة وتقويم وتطوير الأداء التربوي والإداري في المدارس، وتأهيل المشرفين، وإعداد التقارير الإشرافية، ومعالجة الملاحظات الميدانية. اطّلع على التفاصيل في صفحة <a href="about.html" class="text-primary font-bold underline">عن المديرية</a>.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>أين أجد النتائج والقرارات والتقارير العامة؟</summary>
+      <div class="faq-answer">في صفحة <a href="results.html" class="text-primary font-bold underline">النتائج والقرارات</a>، حيث يمكنك البحث والفلترة حسب المنطقة أو المدرسة أو السنة الدراسية.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>كيف أتواصل مع المديرية لاستفسار عام؟</summary>
+      <div class="faq-answer">عبر صفحة <a href="contact.html" class="text-primary font-bold underline">تواصل معنا</a> (نموذج استفسار أو البريد والهاتف). أما الشكاوى الرسمية فتُقدَّم حصراً عبر بوابة الشكاوى للحصول على رقم تتبع.</div>
+    </details>
+
+    <div class="mt-10 rounded-2xl hero-navy text-white p-8 text-center">
+      <h2 class="text-xl font-extrabold mb-2">لم تجد إجابتك؟</h2>
+      <p class="text-white/85 mb-5">فريقنا جاهز لمساعدتك.</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="contact.html" class="px-6 py-3 rounded-lg bg-white text-primary font-bold hover:bg-gold-pale transition-colors">تواصل معنا</a>
+        <a href="complaints.html" class="px-6 py-3 rounded-lg bg-gold text-primary-dark font-bold hover:bg-gold-light transition-colors">بوابة الشكاوى</a>
+      </div>
     </div>
-    <p id="news-empty" class="hidden text-center text-slate-500 py-10">لا توجد عناصر ضمن هذا التصنيف حالياً.</p>
   </main>
 
   <footer class="bg-primary-dark text-white mt-8">
@@ -200,17 +178,6 @@
       <p class="max-w-7xl mx-auto px-4 py-4 text-center text-xs text-white/60">© <span id="year"></span> مديرية الإشراف التربوي — وزارة التربية، جمهورية العراق. جميع الحقوق محفوظة.</p>
     </div>
   </footer>
-
-  <div id="news-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="news-modal-title">
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-box">
-      <button class="modal-close" data-close-modal aria-label="إغلاق">&times;</button>
-      <span id="news-modal-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gold text-primary-dark mb-3"></span>
-      <h3 id="news-modal-title" class="text-xl font-extrabold text-primary mb-1"></h3>
-      <time id="news-modal-date" class="block text-xs text-slate-500 mb-4"></time>
-      <p id="news-modal-text" class="text-slate-600 leading-relaxed"></p>
-    </div>
-  </div>
 
   <script src="assets/js/main.js"></script>
 </body>

@@ -553,10 +553,55 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .contact-title { font-weight: 800; color: #0F2E52; font-size: .95rem; margin-bottom: .25rem; }
 .contact-text { color: #64748B; font-size: .9rem; line-height: 1.7; }
 
+/* ===== الأسئلة الشائعة (accordion عبر details/summary) ===== */
+.faq-item {
+  background: #fff;
+  border: 1px solid #DCE3EC;
+  border-radius: .9rem;
+  margin-bottom: .85rem;
+  box-shadow: 0 1px 2px rgba(15,46,82,.04), 0 10px 24px -18px rgba(15,46,82,.3);
+  overflow: hidden;
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.15rem 1.35rem;
+  font-weight: 700;
+  color: #0F2E52;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #C9A227;
+  transition: transform .25s;
+  flex-shrink: 0;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: #1D4E89; }
+.faq-answer { padding: 0 1.35rem 1.25rem; color: #64748B; line-height: 1.9; font-size: .95rem; }
+
 /* ===== التذييل ===== */
 .footer-title { font-weight: 800; color: #E3C766; margin-bottom: 1rem; font-size: 1.05rem; }
 .footer-link { color: rgba(255,255,255,.7); transition: color .2s; }
 .footer-link:hover { color: #E3C766; }
+.social-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .6rem;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.75);
+  transition: background-color .2s, color .2s, transform .2s;
+}
+.social-btn:hover { background: #C9A227; color: #0A2140; transform: translateY(-2px); }
 
 /* تقليل الحركة لمن يفضّل ذلك */
 @media (prefers-reduced-motion: reduce) {
