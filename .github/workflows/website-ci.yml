@@ -51,6 +51,7 @@ jobs:
           test -f news.html
           test -f results.html
           test -f contact.html
+          test -f faq.html
           test -f admin.html
           test -f 404.html
           test -f manifest.webmanifest
