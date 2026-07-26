@@ -100,21 +100,40 @@
   if (newsFilters && newsGrid) {
     const cards = newsGrid.querySelectorAll('.news-card');
     const emptyMsg = document.getElementById('news-empty');
+    const newsSearch = document.getElementById('news-search');
+    let activeFilter = 'all';
+
+    const applyNewsFilter = () => {
+      const q = newsSearch ? newsSearch.value.trim().toLowerCase() : '';
+      let visible = 0;
+      cards.forEach((card) => {
+        const matchCat = activeFilter === 'all' || card.dataset.category === activeFilter;
+        const matchText = !q || card.textContent.toLowerCase().includes(q);
+        const show = matchCat && matchText;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      emptyMsg.classList.toggle('hidden', visible > 0);
+    };
+
     newsFilters.addEventListener('click', (e) => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;
       newsFilters.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('filter-active'));
       btn.classList.add('filter-active');
-      const filter = btn.dataset.filter;
-      let visible = 0;
-      cards.forEach((card) => {
-        const show = filter === 'all' || card.dataset.category === filter;
-        card.classList.toggle('hidden', !show);
-        if (show) visible++;
-      });
-      emptyMsg.classList.toggle('hidden', visible > 0);
+      activeFilter = btn.dataset.filter;
+      applyNewsFilter();
     });
+    if (newsSearch) newsSearch.addEventListener('input', applyNewsFilter);
   }
+
+  // ---------- تنزيل تجريبي للنماذج (يُربط بالملفات الرسمية مع الخادم) ----------
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-demo-download]')) {
+      e.preventDefault();
+      alert('نسخة تجريبية: ستُربط النماذج بالملفات الرسمية عند تفعيل الخادم (المرحلة الثانية).');
+    }
+  });
 
   // ---------- تكبير بطاقة الخبر ----------
   const newsModal = document.getElementById('news-modal');

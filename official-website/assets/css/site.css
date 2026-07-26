@@ -553,6 +553,98 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .contact-title { font-weight: 800; color: #0F2E52; font-size: .95rem; margin-bottom: .25rem; }
 .contact-text { color: #64748B; font-size: .9rem; line-height: 1.7; }
 
+/* ===== بطاقات الخدمات الإلكترونية ===== */
+.service-tile {
+  display: block;
+  background: #fff;
+  border: 1px solid #DCE3EC;
+  border-radius: 1rem;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(15,46,82,.04), 0 12px 28px -18px rgba(15,46,82,.35);
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.service-tile:hover, .service-tile:focus-visible {
+  transform: translateY(-5px);
+  border-color: #C9A227;
+  box-shadow: 0 18px 40px -20px rgba(15,46,82,.5);
+  outline: none;
+}
+.service-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .9rem;
+  background: #0F2E52;
+  color: #E3C766;
+  transition: background-color .25s, color .25s;
+}
+.service-tile:hover .service-icon { background: #C9A227; color: #0A2140; }
+.service-title { font-weight: 800; color: #0F2E52; font-size: 1.05rem; margin-bottom: .35rem; }
+.service-text { color: #64748B; font-size: .85rem; line-height: 1.7; }
+
+/* ===== بطاقات النماذج والاستمارات ===== */
+.form-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #DCE3EC;
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 1px 2px rgba(15,46,82,.04), 0 12px 28px -18px rgba(15,46,82,.35);
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.form-card:hover { transform: translateY(-4px); border-color: #C9A227; box-shadow: 0 18px 40px -20px rgba(15,46,82,.5); }
+.form-badge {
+  position: absolute;
+  top: 1.1rem;
+  inset-inline-start: 1.5rem;
+  padding: .15rem .6rem;
+  border-radius: .4rem;
+  background: #FEE2E2;
+  color: #B91C1C;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.form-badge-doc { background: #DBEAFE; color: #1D4E89; }
+.form-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .8rem;
+  background: #F7EFD8;
+  color: #0F2E52;
+  margin-bottom: 1rem;
+}
+.form-title { font-weight: 800; color: #0F2E52; font-size: 1.02rem; margin-bottom: .4rem; line-height: 1.5; }
+.form-desc { color: #64748B; font-size: .875rem; line-height: 1.8; margin-bottom: 1.1rem; min-height: 3rem; }
+.form-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem 1.4rem;
+  border-radius: .6rem;
+  background: #0F2E52;
+  color: #fff;
+  font-weight: 700;
+  font-size: .9rem;
+  transition: background-color .2s;
+}
+.form-dl::before {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  background: currentColor;
+  -webkit-mask: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='black' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14'/%3E%3C/svg%3E");
+  mask: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='black' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14'/%3E%3C/svg%3E");
+}
+.form-dl:hover { background: #1D4E89; }
+
 /* ===== الأسئلة الشائعة (accordion عبر details/summary) ===== */
 .faq-item {
   background: #fff;
